@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jubayed Ahmed — DevOps & Full-Stack Engineer</title>
+<meta name="description" content="DevOps & full-stack engineer in Chattogram, Bangladesh. The whole stack, one pair of hands — AWS, CI/CD, Android, Flutter, web.">
+<meta property="og:title" content="Jubayed Ahmed — Pipeline">
+<meta property="og:description" content="init → build → deploy → monitor → merge. One engineer, the whole stack.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=Instrument+Sans:ital,wght@0,400..700;1,400&family=Fira+Code:wght@300..700&family=Anek+Bangla:wght@400..700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0e1a;
+  --bg-2:#10142b;
+  --bg-3:#161b3a;
+  --txt:#eef0ff;
+  --txt-dim:rgba(238,240,255,.6);
+  --txt-faint:rgba(238,240,255,.32);
+  --violet:#8f8aff;
+  --violet-hot:#b5b2ff;
+  --violet-dim:rgba(143,138,255,.55);
+  --violet-faint:rgba(143,138,255,.16);
+  --violet-ghost:rgba(143,138,255,.07);
+  --mint:#7ee8c0;
+  --mint-dim:rgba(126,232,192,.5);
+  --line:rgba(143,138,255,.14);
+  --line-strong:rgba(143,138,255,.34);
+  --disp:'Syne',sans-serif;
+  --body:'Instrument Sans',sans-serif;
+  --mono:'Fira Code',monospace;
+  --bn:'Anek Bangla',sans-serif;
+  --gutter:clamp(20px,4.2vw,72px);
+  --spine:clamp(52px,6vw,92px);
+  --glow:0 0 22px rgba(143,138,255,.4);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--txt);
+  font-family:var(--body);
+  font-weight:400;
+  line-height:1.65;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--violet);color:var(--bg)}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--bg-3);border-radius:5px;border:2px solid var(--bg)}
+::-webkit-scrollbar-thumb:hover{background:var(--violet-dim)}
+a{color:inherit;text-decoration:none}
+a:focus-visible,[role=button]:focus-visible{outline:2px solid var(--violet);outline-offset:3px}
+
+/* ---------- git-graph canvas ---------- */
+#graph{position:fixed;inset:0;z-index:0;opacity:.55;pointer-events:none}
+main,footer,.topbar{position:relative;z-index:2}
+
+/* ---------- pipeline spine ---------- */
+#spine{
+  position:fixed;top:0;bottom:0;left:0;width:var(--spine);z-index:50;
+  pointer-events:none;
+}
+#spine .rail{
+  position:absolute;top:0;bottom:0;left:50%;width:2px;transform:translateX(-50%);
+  background:var(--violet-faint);
+}
+#spine .fill{
+  position:absolute;top:0;left:50%;width:2px;transform:translateX(-50%);
+  background:linear-gradient(to bottom, var(--violet), var(--mint));
+  box-shadow:0 0 12px rgba(143,138,255,.5);
+  height:0;
+}
+#spine .node{
+  position:absolute;left:50%;transform:translate(-50%,-50%);
+  width:11px;height:11px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--violet-dim);
+  transition:background .3s,border-color .3s,box-shadow .3s;
+}
+#spine .node::after{
+  content:attr(data-label);position:absolute;left:18px;top:50%;transform:translateY(-50%) rotate(0);
+  font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:lowercase;
+  color:var(--txt-faint);white-space:nowrap;transition:color .3s;
+}
+#spine .node.lit{background:var(--violet);border-color:var(--violet-hot);box-shadow:var(--glow)}
+#spine .node.lit::after{color:var(--violet-hot)}
+@media(max-width:900px){
+  #spine{display:none}
+  :root{--spine:0px}
+}
+/* mobile progress bar */
+#mprog{position:fixed;top:0;left:0;height:3px;width:0;z-index:70;
+  background:linear-gradient(90deg,var(--violet),var(--mint));display:none}
+@media(max-width:900px){#mprog{display:block}}
+
+/* ---------- topbar ---------- */
+.topbar{
+  position:fixed;top:0;left:var(--spine);right:0;z-index:60;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px var(--gutter) 16px clamp(12px,2vw,24px);
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+  background:linear-gradient(to bottom, rgba(11,14,26,.9), rgba(11,14,26,0));
+}
+.topbar .brand{font-weight:600;color:var(--violet)}
+.topbar .brand .bn{font-family:var(--bn);color:var(--txt-dim);margin-left:10px;font-weight:500;letter-spacing:0}
+.topbar nav{display:flex;gap:clamp(14px,3vw,32px);text-transform:lowercase}
+.topbar nav a{color:var(--txt-dim);transition:color .2s}
+.topbar nav a:hover{color:var(--violet-hot)}
+.topbar nav a i{font-style:normal;color:var(--violet)}
+@media(max-width:760px){.topbar nav{gap:12px}}
+
+/* ---------- hero ---------- */
+.hero{
+  min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+  padding:100px var(--gutter) 60px calc(var(--spine) + clamp(12px,2vw,28px));
+}
+.hero .cmd{
+  font-family:var(--mono);font-size:clamp(11px,1.3vw,13px);color:var(--txt-dim);
+  margin-bottom:clamp(18px,3vh,30px);
+}
+.hero .cmd b{color:var(--mint);font-weight:500}
+.hero .cmd i{font-style:normal;color:var(--violet)}
+.hero h1{
+  font-family:var(--disp);font-weight:800;
+  font-size:clamp(3rem,12.5vw,11.8rem);
+  line-height:.92;letter-spacing:-.03em;text-transform:uppercase;
+  cursor:default;
+}
+.hero h1 .w{display:block;overflow:hidden;padding-bottom:.05em}
+.hero h1 .w .l{
+  display:inline-block;transform:translateY(115%);
+  animation:rise .9s cubic-bezier(.16,.8,.24,1) forwards;
+  font-variation-settings:'wght' 700;
+  transition:color .3s;
+  will-change:font-variation-settings,transform;
+}
+.hero h1 .w:nth-child(2) .l{color:var(--violet)}
+@keyframes rise{to{transform:translateY(0)}}
+.hero .bn-line{
+  font-family:var(--bn);font-weight:500;font-size:clamp(1.1rem,2.4vw,1.7rem);
+  color:var(--txt-dim);margin-top:16px;
+}
+.hero .bn-line i{font-style:normal;font-family:var(--mono);font-size:.6em;color:var(--txt-faint);letter-spacing:.14em;margin-left:14px;text-transform:lowercase}
+.hero .intro{
+  max-width:56ch;color:var(--txt-dim);margin-top:clamp(22px,4vh,38px);
+  font-size:clamp(.98rem,1.4vw,1.12rem);
+}
+.hero .intro b{color:var(--txt);font-weight:600}
+/* stats */
+.stats{
+  display:flex;gap:clamp(20px,4.5vw,64px);flex-wrap:wrap;
+  margin-top:clamp(28px,5vh,52px);
+}
+.stat .k{
+  font-family:var(--disp);font-weight:800;font-size:clamp(1.7rem,3.6vw,2.9rem);
+  line-height:1;letter-spacing:-.02em;color:var(--txt);
+  font-variant-numeric:tabular-nums;
+}
+.stat .k i{font-style:normal;color:var(--violet)}
+.stat .k .mint{color:var(--mint)}
+.stat .d{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:lowercase;color:var(--txt-faint);margin-top:8px}
+
+/* ---------- section scaffolding ---------- */
+section{padding:clamp(88px,14vh,176px) var(--gutter) clamp(88px,14vh,176px) calc(var(--spine) + clamp(12px,2vw,28px))}
+.stage-head{margin-bottom:clamp(40px,6.5vh,80px)}
+.stage-head .stage{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--txt-faint);
+  display:flex;align-items:center;gap:12px;margin-bottom:18px;text-transform:lowercase;
+}
+.stage-head .stage b{color:var(--mint);font-weight:500}
+.stage-head .stage::before{content:'';width:34px;height:1px;background:var(--violet)}
+.stage-head h2{
+  font-family:var(--disp);font-weight:800;
+  font-size:clamp(2.4rem,7vw,5.6rem);line-height:.95;letter-spacing:-.025em;text-transform:uppercase;
+}
+.stage-head h2 em{font-style:normal;color:var(--violet)}
+.stage-head h2 .bn{
+  font-family:var(--bn);font-weight:600;font-size:.34em;color:var(--txt-dim);
+  text-transform:none;margin-left:.7em;vertical-align:.5em;letter-spacing:0;
+}
+
+/* ---------- jobs (projects) ---------- */
+.job{
+  border:1px solid var(--line);border-radius:10px;margin-bottom:16px;
+  background:rgba(16,20,43,.5);backdrop-filter:blur(4px);
+  cursor:pointer;position:relative;overflow:hidden;
+  transition:border-color .25s, box-shadow .25s, transform .25s;
+}
+.job:hover{border-color:var(--line-strong);box-shadow:0 0 0 1px var(--violet-ghost), 0 12px 44px rgba(0,0,0,.35), 0 0 34px rgba(143,138,255,.08);transform:translateY(-2px)}
+.job::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(to bottom,var(--violet),transparent);
+  opacity:0;transition:opacity .25s;
+}
+.job:hover::before{opacity:1}
+.job .head{
+  display:grid;grid-template-columns:minmax(78px,100px) 1fr auto auto;
+  gap:clamp(12px,2.6vw,36px);align-items:center;
+  padding:clamp(18px,2.8vh,26px) clamp(16px,2.6vw,28px);
+}
+.job .jid{font-family:var(--mono);font-size:11px;color:var(--txt-faint);line-height:1.8}
+.job .jid b{display:block;color:var(--violet);font-weight:500;font-size:12px}
+.job h3{
+  font-family:var(--disp);font-weight:750;
+  font-size:clamp(1.4rem,3.2vw,2.3rem);line-height:1;letter-spacing:-.02em;text-transform:uppercase;
+  transition:color .2s;
+}
+.job:hover h3{color:var(--violet-hot)}
+.job h3 .bn{font-family:var(--bn);font-weight:600;font-size:.55em;color:var(--txt-dim);text-transform:none;margin-left:.45em}
+.job .cls{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--txt-faint);text-align:right;line-height:1.8;text-transform:lowercase}
+.chip{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:lowercase;
+  padding:6px 13px;border-radius:100px;border:1px solid var(--line-strong);white-space:nowrap;
+}
+.chip.pass{color:var(--mint);border-color:rgba(126,232,192,.4)}
+.chip.pass::before{content:'✓ '}
+.chip.run{color:var(--violet-hot);border-color:var(--line-strong)}
+.chip.run::before{content:'● ';animation:blink 1.3s infinite}
+@keyframes blink{50%{opacity:.2}}
+.chip.hold{color:var(--txt-faint)}
+.chip.hold::before{content:'◌ '}
+.job .logs{max-height:0;overflow:hidden;opacity:0;transition:max-height .55s cubic-bezier(.16,.8,.24,1),opacity .4s}
+.job.open .logs{max-height:760px;opacity:1}
+.logs-inner{
+  border-top:1px solid var(--line);
+  padding:clamp(20px,3vh,30px) clamp(16px,2.6vw,28px);
+  display:grid;grid-template-columns:1.2fr .8fr;gap:22px 52px;
+}
+@media(max-width:840px){.logs-inner{grid-template-columns:1fr}}
+.logs-inner .sum{grid-column:1/-1;color:var(--txt-dim);font-size:.98rem;max-width:80ch}
+.logs-inner h6{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:lowercase;color:var(--violet);margin-bottom:12px;font-weight:500}
+.logs-inner ul{list-style:none}
+.logs-inner li{
+  padding:6px 0 6px 22px;position:relative;color:var(--txt-dim);font-size:.92rem;
+  border-bottom:1px solid var(--violet-ghost);
+}
+.logs-inner li::before{content:'-->';position:absolute;left:0;font-family:var(--mono);font-size:.75em;color:var(--mint);top:9px}
+.logs-inner li:last-child{border:none}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tags span{font-family:var(--mono);font-size:10.5px;border:1px solid var(--line);border-radius:6px;padding:5px 11px;color:var(--txt-dim);background:rgba(11,14,26,.5)}
+.job .cue{
+  position:absolute;right:clamp(16px,2.6vw,28px);bottom:10px;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:lowercase;color:var(--txt-faint);transition:color .2s;
+}
+.job:hover .cue{color:var(--violet-hot)}
+@media(max-width:840px){
+  .job .head{grid-template-columns:1fr auto}
+  .job .jid{grid-column:1/-1;display:flex;gap:12px}
+  .job .jid b{margin:0}
+  .job .cls{display:none}
+}
+
+/* ---------- deploy history ---------- */
+.deploys{background:linear-gradient(to bottom, transparent, rgba(16,20,43,.55) 12% 88%, transparent)}
+.tenure{
+  border-left:1px solid var(--line);position:relative;
+  margin-left:6px;padding:0 0 clamp(34px,5vh,56px) clamp(24px,3.6vw,48px);
+}
+.tenure:last-of-type{padding-bottom:0}
+.tenure::before{
+  content:'';position:absolute;left:-6px;top:6px;width:11px;height:11px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--violet);box-shadow:var(--glow);
+}
+.tenure.live::before{background:var(--mint);border-color:var(--mint);box-shadow:0 0 16px rgba(126,232,192,.5)}
+.tenure .when{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--txt-faint);text-transform:lowercase}
+.tenure .when b{color:var(--mint);font-weight:500}
+.tenure h3{
+  font-family:var(--disp);font-weight:750;
+  font-size:clamp(1.5rem,3.4vw,2.4rem);letter-spacing:-.02em;line-height:1.05;text-transform:uppercase;
+  margin:10px 0 4px;
+}
+.tenure .role{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--violet);text-transform:lowercase;margin-bottom:16px}
+.tenure ul{list-style:none;max-width:74ch}
+.tenure li{
+  padding:7px 0 7px 22px;position:relative;color:var(--txt-dim);font-size:.94rem;
+  border-bottom:1px solid var(--violet-ghost);
+}
+.tenure li::before{content:'-->';position:absolute;left:0;font-family:var(--mono);font-size:.75em;color:var(--mint);top:10px}
+.tenure li:last-child{border:none}
+.tenure li b{color:var(--txt);font-weight:600}
+.creds{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:clamp(44px,7vh,72px)}
+.cred{border:1px solid var(--line);border-radius:10px;padding:22px 20px;background:rgba(16,20,43,.5)}
+.cred h6{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:lowercase;color:var(--violet);margin-bottom:10px;font-weight:500}
+.cred p{font-size:.9rem;color:var(--txt-dim)}
+.cred p b{color:var(--txt);font-weight:600;display:block;margin-bottom:3px}
+.cred .bn-mark{font-family:var(--bn)}
+
+/* ---------- monitor (skills) ---------- */
+.mon-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.mon{
+  border:1px solid var(--line);border-radius:12px;padding:clamp(26px,3.6vw,42px);
+  background:rgba(16,20,43,.5);position:relative;overflow:hidden;
+  transition:border-color .25s, box-shadow .25s;
+}
+.mon:hover{border-color:var(--line-strong);box-shadow:0 0 30px rgba(143,138,255,.07)}
+.mon .bn-big{
+  position:absolute;right:-4px;bottom:-28px;font-family:var(--bn);font-weight:700;
+  font-size:7.6rem;line-height:1;color:var(--violet-ghost);pointer-events:none;user-select:none;
+}
+.mon h3{
+  font-family:var(--disp);font-weight:750;text-transform:uppercase;
+  font-size:clamp(1.25rem,2.2vw,1.7rem);margin-bottom:18px;letter-spacing:-.015em;
+}
+.mon ul{list-style:none;position:relative;z-index:1}
+.mon li{
+  padding:9px 0;border-bottom:1px solid var(--violet-ghost);color:var(--txt-dim);font-size:.92rem;
+  display:flex;justify-content:space-between;gap:14px;
+}
+.mon li:last-child{border:none}
+.mon li em{
+  font-style:normal;font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;
+  color:var(--txt-faint);text-transform:lowercase;padding-top:4px;white-space:nowrap;text-align:right;
+}
+
+/* ---------- quote ---------- */
+.quote blockquote{
+  font-family:var(--disp);font-weight:750;
+  font-size:clamp(1.9rem,5.4vw,4.2rem);line-height:1.06;letter-spacing:-.02em;text-transform:uppercase;
+  max-width:24ch;
+}
+.quote blockquote em{font-style:normal;color:var(--violet)}
+.quote .bn-line{font-family:var(--bn);font-weight:500;color:var(--txt-dim);font-size:clamp(1.05rem,2vw,1.3rem);margin-top:28px}
+.quote .bn-line span{color:var(--txt-faint);font-family:var(--mono);font-size:.64em;letter-spacing:.14em;margin-left:16px;text-transform:lowercase}
+
+/* ---------- merge (contact) ---------- */
+.merge{min-height:86svh;display:flex;flex-direction:column;justify-content:center}
+.merge .cmd{font-family:var(--mono);font-size:12px;color:var(--txt-dim);margin-bottom:26px}
+.merge .cmd b{color:var(--mint);font-weight:500}
+.merge h2{
+  font-family:var(--disp);font-weight:800;text-transform:uppercase;
+  font-size:clamp(2.7rem,10.5vw,9.4rem);line-height:.9;letter-spacing:-.03em;
+}
+.merge h2 a{color:var(--violet);position:relative;display:inline-block;transition:color .25s,text-shadow .25s}
+.merge h2 a:hover{color:var(--violet-hot);text-shadow:0 0 40px rgba(143,138,255,.5)}
+.merge h2 a::after{
+  content:'';position:absolute;left:0;bottom:.02em;width:100%;height:.05em;background:var(--violet);
+  transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.16,.8,.24,1);
+}
+.merge h2 a:hover::after{transform:scaleX(1)}
+.merge .links{
+  display:flex;gap:clamp(16px,4vw,44px);margin-top:clamp(32px,5.5vh,58px);flex-wrap:wrap;
+  font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:lowercase;
+}
+.merge .links a{color:var(--txt-dim);border-bottom:1px solid var(--line-strong);padding-bottom:5px;transition:color .2s,border-color .2s}
+.merge .links a:hover{color:var(--violet-hot);border-color:var(--violet)}
+.footer{
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  padding:24px var(--gutter) 24px calc(var(--spine) + clamp(12px,2vw,28px));
+  border-top:1px solid var(--line);
+  font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:lowercase;color:var(--txt-faint);
+}
+.footer .bn{font-family:var(--bn);text-transform:none;font-weight:500}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(32px);transition:opacity .85s ease,transform .85s cubic-bezier(.16,.8,.24,1)}
+.rv.in{opacity:1;transform:none}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none}
+  .hero h1 .w .l{transform:none}
+  #graph{display:none}
+}
+</style>
+</head>
+<body>
+
+<canvas id="graph" aria-hidden="true"></canvas>
+<div id="mprog" aria-hidden="true"></div>
+
+<div id="spine" aria-hidden="true">
+  <div class="rail"></div>
+  <div class="fill" id="spineFill"></div>
+</div>
+
+<header class="topbar">
+  <a class="brand" href="#top">jubayed.dev<span class="bn">জোবায়েদ</span></a>
+  <nav>
+    <a href="#build"><i>./</i>build</a>
+    <a href="#deploy"><i>./</i>deploy</a>
+    <a href="#monitor"><i>./</i>monitor</a>
+    <a href="#merge"><i>./</i>merge</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- ============ INIT / HERO ============ -->
+<section class="hero" id="init" data-node="init">
+  <p class="cmd"><b>$</b> pipeline run <i>--engineer</i> jubayed-ahmed <i>--from</i> chattogram-bd <i>--stages</i> all</p>
+  <h1 id="kinetic" aria-label="Jubayed Ahmed">
+    <span class="w"></span>
+    <span class="w"></span>
+  </h1>
+  <p class="bn-line">জোবায়েদ আহমেদ <i>// devops · cloud · full-stack</i></p>
+  <p class="intro"><b>One engineer, the whole stack.</b> I keep production infrastructure alive on AWS, build the CI/CD pipelines that carry software to release, and ship complete products of my own — native Android, Flutter, and full-stack web — end to end, solo.</p>
+  <div class="stats">
+    <div class="stat rv"><div class="k"><i>+</i><span data-count="30">0</span>%</div><div class="d">deploy_frequency</div></div>
+    <div class="stat rv"><div class="k"><span data-count="99.9" data-dec="1">0</span><span class="mint">%</span></div><div class="d">uptime_held</div></div>
+    <div class="stat rv"><div class="k"><i>+</i><span data-count="40">0</span>%</div><div class="d">elk_retrieval_speed</div></div>
+    <div class="stat rv"><div class="k">7<i> shipped</i></div><div class="d">projects_solo</div></div>
+  </div>
+</section>
+
+<!-- ============ BUILD / PROJECTS ============ -->
+<section id="build" data-node="build">
+  <div class="stage-head rv">
+    <span class="stage">stage 01 <b>·</b> 7 jobs <b>·</b> 2 running</span>
+    <h2><em>Build</em><span class="bn">প্রকল্পসমূহ</span></h2>
+  </div>
+
+  <article class="job rv" tabindex="0" role="button" aria-expanded="false">
+    <div class="head">
+      <span class="jid"><b>job#001</b>2025–26</span>
+      <h3>Banking CI/CD Migration</h3>
+      <span class="cls">enterprise<br>devops</span>
+      <span class="chip pass">passed</span>
+    </div>
+    <div class="logs"><div class="logs-inner">
+      <p class="sum">Consulting on a digital-banking client's migration from Azure DevOps to GitLab CI/CD — pipelines authored, Windows Shell Runners registered across locked-down RDP jump-host chains, IIS deployment automated for ASP.NET across four environments.</p>
+      <div>
+        <h6>// log</h6>
+        <ul>
+          <li>build → test → deploy pipelines across dev / qa / uat / prod</li>
+          <li>Runners installed on air-gapped internal servers via multi-hop RDP</li>
+          <li>web.config transformation mechanism reverse-engineered; correct GitLab-equivalent documented</li>
+          <li>Solution annex adopted by the client team</li>
+        </ul>
+      </div>
+      <div>
+        <h6>// stack</h6>
+        <div class="tags"><span>gitlab-ci</span><span>powershell</span><span>iis</span><span>asp.net</span><span>win-runners</span></div>
+        <p style="margin-top:16px;font-size:.88rem;color:var(--txt-dim)">Regulated-industry constraints, zero-downtime expectations — DevOps where mistakes are expensive.</p>
+      </div>
+    </div></div>
+    <span class="cue">+ expand</span>
+  </article>
+
+  <article class="job rv" tabindex="0" role="button" aria-expanded="false">
+    <div class="head">
+      <span class="jid"><b>job#002</b>2026</span>
+      <h3>MoneyMan<span class="bn">টাকা</span></h3>
+      <span class="cls">fintech<br>native android</span>
+      <span class="chip run">running</span>
+    </div>
+    <div class="logs"><div class="logs-inner">
+      <p class="sum">A personal finance app built to replace four years of daily dependence on a commercial app — migrating ~4,000 real transactions from a reverse-engineered SQLite backup into an offline-first, precision-safe ledger of original design.</p>
+      <div>
+        <h6>// log</h6>
+        <ul>
+          <li>Proprietary .mmbak SQLite backup format reverse-engineered for lossless migration</li>
+          <li>All money stored as integer paisa — zero floating-point drift across 4,000+ records</li>
+          <li>First-class debt &amp; savings tracking, not bolted-on categories</li>
+          <li>Timezone-correct throughout — a detail most finance apps get wrong</li>
+        </ul>
+      </div>
+      <div>
+        <h6>// stack</h6>
+        <div class="tags"><span>kotlin</span><span>jetpack-compose</span><span>room</span><span>sqlite</span><span>material-3</span></div>
+        <p style="margin-top:16px;font-size:.88rem;color:var(--txt-dim)">V2 roadmap: widgets, full-text search, budgets, biometric lock, Bengali localisation — a seven-phase build with agent-ready docs.</p>
+      </div>
+    </div></div>
+    <span class="cue">+ expand</span>
+  </article>
+
+  <article class="job rv" tabindex="0" role="button" aria-expanded="false">
+    <div class="head">
+      <span class="jid"><b>job#003</b>2026</span>
+      <h3>Ta'allam<span class="bn">তাআল্লাম</span></h3>
+      <span class="cls">edtech<br>mobile</span>
+      <span class="chip run">running</span>
+    </div>
+    <div class="logs"><div class="logs-inner">
+      <p class="sum">An offline-first Arabic learning app for Bengali-speaking learners — Duolingo-style progression with dual Conversational and Quranic tracks.</p>
+      <div>
+        <h6>// log</h6>
+        <ul>
+          <li>Dual-track curriculum: everyday Arabic and Quranic Arabic, taught through Bangla</li>
+          <li>Offline-first architecture for low-connectivity users across Bangladesh</li>
+          <li>AI-assisted content pipeline converting source PDFs into structured lessons</li>
+          <li>Public and in active development on GitHub</li>
+        </ul>
+      </div>
+      <div>
+        <h6>// stack</h6>
+        <div class="tags"><span>flutter</span><span>riverpod</span><span>supabase</span><span>gemini-api</span></div>
+        <p style="margin-top:16px;font-size:.88rem;color:var(--txt-dim)">Every architectural choice targets zero marginal cost per learner — built to scale before revenue does.</p>
+      </div>
+    </div></div>
+    <span class="cue">+ expand</span>
+  </article>
+
+  <article class="job rv" tabindex="0" role="button" aria-expanded="false">
+    <div class="head">
+      <span class="jid"><b>job#004</b>2025</span>
+      <h3>Encrypted Digital Library</h3>
+      <span class="cls">security<br>full-stack</span>
+      <span class="chip pass">passed</span>
+    </div>
+    <div class="logs"><div class="logs-inner">
+      <p class="sum">A private digital library platform for a medical university — AES-256-GCM encrypted content delivery, in-browser PDF and EPUB reading, and role-based access control, containerised for on-premise deployment.</p>
+      <div>
+        <h6>// log</h6>
+        <ul>
+          <li>Content encrypted at rest; decrypted only for authorised readers</li>
+          <li>In-browser reading via PDF.js and epub.js — no downloads, no leakage</li>
+          <li>Role-based access for students, faculty, and librarians</li>
+          <li>Fully Dockerised for the university's own infrastructure</li>
+        </ul>
+      </div>
+      <div>
+        <h6>// stack</h6>
+        <div class="tags"><span>node</span><span>express</span><span>react</span><span>postgresql</span><span>docker</span><span>aes-256-gcm</span></div>
+      </div>
+    </div></div>
+    <span class="cue">+ expand</span>
+  </article>
+
+  <article class="job rv" tabindex="0" role="button" aria-expanded="false">
+    <div class="head">
+      <span class="jid"><b>job#005</b>2025</span>
+      <h3>Invoice &amp; Inventory PWA</h3>
+      <span class="cls">pwa<br>zero-cost infra</span>
+      <span class="chip pass">passed</span>
+    </div>
+    <div class="logs"><div class="logs-inner">
+      <p class="sum">A complete invoicing and inventory system for an internet &amp; CCTV service company — running entirely in the browser with local-first storage, deployed serverless on GitHub Pages.</p>
+      <div>
+        <h6>// log</h6>
+        <ul>
+          <li>IndexedDB via Dexie.js — the client's data never leaves their device</li>
+          <li>Installable PWA: works offline, feels native</li>
+          <li>Static hosting: no server bills, no maintenance contract, no downtime</li>
+        </ul>
+      </div>
+      <div>
+        <h6>// stack</h6>
+        <div class="tags"><span>vite</span><span>react</span><span>dexie</span><span>pwa</span><span>gh-pages</span></div>
+      </div>
+    </div></div>
+    <span class="cue">+ expand</span>
+  </article>
+
+  <article class="job rv" tabindex="0" role="button" aria-expanded="false">
+    <div class="head">
+      <span class="jid"><b>job#006</b>2026</span>
+      <h3>Real Estate Platform</h3>
+      <span class="cls">proptech<br>platform</span>
+      <span class="chip hold">staged</span>
+    </div>
+    <div class="logs"><div class="logs-inner">
+      <p class="sum">A business management platform for a Bangladeshi real estate firm — admin panels, property and client workflows, and mapping, architected end-to-end on free-tier cloud infrastructure.</p>
+      <div>
+        <h6>// log</h6>
+        <ul>
+          <li>FilamentPHP admin architecture for rapid, robust back-office tooling</li>
+          <li>Infrastructure engineered to free tiers: Oracle Cloud compute, Cloudflare R2, OpenStreetMap</li>
+          <li>Scoped, quoted, and architected solo — from requirements to delivery plan</li>
+        </ul>
+      </div>
+      <div>
+        <h6>// stack</h6>
+        <div class="tags"><span>laravel</span><span>filamentphp</span><span>oracle-cloud</span><span>cloudflare-r2</span><span>osm</span></div>
+      </div>
+    </div></div>
+    <span class="cue">+ expand</span>
+  </article>
+
+  <article class="job rv" tabindex="0" role="button" aria-expanded="false">
+    <div class="head">
+      <span class="jid"><b>job#007</b>ongoing</span>
+      <h3>Ops Automation Suite</h3>
+      <span class="cls">automation<br>internal</span>
+      <span class="chip pass">passed</span>
+    </div>
+    <div class="logs"><div class="logs-inner">
+      <p class="sum">The unglamorous work that compounds: automated tenant billing for a 15-flat rental portfolio, and a real-time customer-support monitor that polls an authenticated API and pipes alerts straight to Telegram.</p>
+      <div>
+        <h6>// log</h6>
+        <ul>
+          <li>Hours of monthly manual billing collapsed into a scheduled job</li>
+          <li>Support messages surfaced in seconds instead of on next login</li>
+          <li>Built with the cheapest tool that works — Apps Script, cron, webhooks</li>
+        </ul>
+      </div>
+      <div>
+        <h6>// stack</h6>
+        <div class="tags"><span>apps-script</span><span>telegram-bot</span><span>webhooks</span></div>
+      </div>
+    </div></div>
+    <span class="cue">+ expand</span>
+  </article>
+</section>
+
+<!-- ============ DEPLOY / EXPERIENCE ============ -->
+<section class="deploys" id="deploy" data-node="deploy">
+  <div class="stage-head rv">
+    <span class="stage">stage 02 <b>·</b> 4 environments <b>·</b> since nov 2019</span>
+    <h2><em>Deploy</em> History<span class="bn">কর্মজীবন</span></h2>
+  </div>
+
+  <article class="tenure live rv">
+    <p class="when"><b>may 2026 — present</b> · remote</p>
+    <h3>Neosis-IT Solutions</h3>
+    <p class="role">devops engineer · full-time</p>
+    <ul>
+      <li>Currently serving as DevOps Engineer — infrastructure, CI/CD pipelines, and cloud operations, remotely</li>
+      <li>Applying production AWS, Docker, and monitoring experience to live environments</li>
+    </ul>
+  </article>
+
+  <article class="tenure live rv">
+    <p class="when"><b>feb 2023 — present</b> · bangladesh · remote</p>
+    <h3>Digitgiants</h3>
+    <p class="role">software engineer · full-time · 3 yrs 5 mos</p>
+    <ul>
+      <li>Full-stack engineering across <b>Python, FastAPI</b>, and adjacent domains in a remote-first team</li>
+      <li>Building and maintaining production web services and APIs</li>
+      <li>Held concurrently with independent product development and DevOps consulting</li>
+    </ul>
+  </article>
+
+  <article class="tenure rv">
+    <p class="when"><b>aug 2021 — jan 2023</b> · germany · remote</p>
+    <h3>Mulytic Labs GmbH</h3>
+    <p class="role">technical support engineer · 1 yr 6 mos, incl. internship</p>
+    <ul>
+      <li>Maintained smart infrastructure remotely with <b>ELK Stack, Grafana, Prometheus, Kibana, Balena, Jira</b></li>
+      <li>Administered Linux production servers — hardening and optimisation at <b>99.9% uptime</b></li>
+      <li>Configured Nginx reverse proxies, SSL, and DNS across multiple production environments</li>
+      <li>AWS services and ELK monitoring — <b>40% faster data retrieval</b> and rapid log analysis</li>
+      <li>Converted from a 3-month internship (aug–oct 2021) to full-time on merit</li>
+    </ul>
+  </article>
+
+  <article class="tenure rv">
+    <p class="when"><b>nov 2019 — apr 2020</b> · bangladesh</p>
+    <h3>Leadsoft Bangladesh Limited</h3>
+    <p class="role">trainee · game developer · apprenticeship</p>
+    <ul>
+      <li>First professional post — game development apprenticeship, the origin of an engineering practice</li>
+      <li>Followed by a run of independent Unity prototypes that sharpened the instinct to finish and ship</li>
+    </ul>
+  </article>
+
+  <div class="creds rv">
+    <div class="cred">
+      <h6>// education</h6>
+      <p><b>B.Sc. in Computer Science &amp; Engineering</b>International Islamic University Chittagong · 2013–2018</p>
+    </div>
+    <div class="cred">
+      <h6>// thesis</h6>
+      <p><b>Noisy Health Data Integration with Privacy Preservation</b>Supervised by Dr. Shahidul Islam Khan</p>
+    </div>
+    <div class="cred">
+      <h6>// publication</h6>
+      <p><b>Hybrid Feature Selection Algorithm to Support Health Data Warehousing</b>ICICCT 2019 · Istanbul, Turkey · Co-author</p>
+    </div>
+    <div class="cred">
+      <h6>// languages</h6>
+      <p><b>Bengali <span class="bn-mark">বাংলা</span> · English</b>Native · Professional working proficiency</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MONITOR / SKILLS ============ -->
+<section id="monitor" data-node="monitor">
+  <div class="stage-head rv">
+    <span class="stage">stage 03 <b>·</b> all systems reporting</span>
+    <h2><em>Monitor</em><span class="bn">দক্ষতা</span></h2>
+  </div>
+  <div class="mon-grid rv">
+    <div class="mon">
+      <span class="bn-big" aria-hidden="true">যন্ত্র</span>
+      <h3>DevOps &amp; Cloud</h3>
+      <ul>
+        <li>AWS in production <em>ecs · ecr · ec2 · iam</em></li>
+        <li>CI/CD pipeline design <em>gh-actions · gitlab · azure</em></li>
+        <li>Containers <em>docker · compose</em></li>
+        <li>Monitoring <em>cloudwatch · elk · grafana · prometheus</em></li>
+        <li>Linux administration <em>nginx · ssl · hardening</em></li>
+        <li>IaC &amp; orchestration <em>terraform · kubernetes</em></li>
+      </ul>
+    </div>
+    <div class="mon">
+      <span class="bn-big" aria-hidden="true">পণ্য</span>
+      <h3>Product Engineering</h3>
+      <ul>
+        <li>Native Android <em>kotlin · compose</em></li>
+        <li>Cross-platform mobile <em>flutter · riverpod</em></li>
+        <li>Backend &amp; APIs <em>python · fastapi · node · laravel</em></li>
+        <li>Web frontends <em>react · .net heritage</em></li>
+        <li>Offline-first data <em>room · dexie · sqlite · postgres</em></li>
+      </ul>
+    </div>
+    <div class="mon">
+      <span class="bn-big" aria-hidden="true">বুদ্ধি</span>
+      <h3>AI-Native Workflow</h3>
+      <ul>
+        <li>Agent-ready documentation <em>context files · build plans</em></li>
+        <li>LLM content pipelines <em>gemini · langchain</em></li>
+        <li>Applied NLP research <em>bert · published author</em></li>
+        <li>Automation glue <em>apps script · bots · webhooks</em></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUOTE ============ -->
+<section class="quote">
+  <blockquote class="rv">Great software doesn't need a big team — it needs <em>one engineer</em> who refuses to ship anything less.</blockquote>
+  <p class="bn-line rv">চট্টগ্রামে তৈরি, বিশ্বজুড়ে পৌঁছে <span>// built in chattogram · delivered worldwide</span></p>
+</section>
+
+<!-- ============ MERGE / CONTACT ============ -->
+<section class="merge" id="merge" data-node="merge">
+  <div class="rv">
+    <p class="cmd"><b>$</b> git checkout -b your-project <span style="color:var(--txt-faint)"># open to select projects &amp; roles</span></p>
+    <h2>Ready to<br><a href="mailto:jubayedsr@gmail.com">merge?</a></h2>
+    <div class="links">
+      <a href="mailto:jubayedsr@gmail.com">jubayedsr@gmail.com ↗</a>
+      <a href="https://www.linkedin.com/in/jashuvo/" target="_blank" rel="noopener">linkedin/jashuvo ↗</a>
+      <a href="https://github.com/Jashuvo" target="_blank" rel="noopener">github/jashuvo ↗</a>
+      <a href="tel:+8801401223871">+880 1401-223871 ↗</a>
+      <a href="../Jubayed_Ahmed_Resume.pdf" download="Jubayed_Ahmed_Resume.pdf">resume.pdf ↓</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <span>© 2026 jubayed ahmed · <span class="bn">জোবায়েদ আহমেদ</span></span>
+  <span>pipeline finished · 0 errors · 0 warnings</span>
+  <span>chattogram · 22.35°n 91.78°e</span>
+</footer>
+
+<script>
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- kinetic hero type ---------- */
+(() => {
+  const h = document.getElementById('kinetic');
+  const words = ['Jubayed','Ahmed'];
+  const rows = h.querySelectorAll('.w');
+  words.forEach((word, wi) => {
+    [...word].forEach((ch, i) => {
+      const s = document.createElement('span');
+      s.className = 'l';
+      s.textContent = ch;
+      s.style.animationDelay = (wi * .12 + i * .028) + 's';
+      rows[wi].appendChild(s);
+    });
+  });
+  if (reduced) return;
+  const letters = [...h.querySelectorAll('.l')];
+  let mx = -9999, my = -9999, raf = null;
+  const update = () => {
+    letters.forEach(l => {
+      const r = l.getBoundingClientRect();
+      const dx = (r.left + r.width / 2) - mx;
+      const dy = (r.top + r.height / 2) - my;
+      const dist = Math.hypot(dx, dy);
+      const range = 260;
+      const t = Math.max(0, 1 - dist / range);
+      const wght = 700 + t * 100;              /* 700 → 800 near cursor */
+      const lift = t * -6;
+      l.style.fontVariationSettings = `'wght' ${wght.toFixed(0)}`;
+      l.style.transform = `translateY(${lift.toFixed(1)}px)`;
+    });
+    raf = null;
+  };
+  addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    if (!raf) raf = requestAnimationFrame(update);
+  }, {passive:true});
+  addEventListener('mouseleave', () => { mx = my = -9999; if (!raf) raf = requestAnimationFrame(update); });
+})();
+
+/* ---------- git-graph background ---------- */
+(() => {
+  if (reduced) return;
+  const cv = document.getElementById('graph');
+  const ctx = cv.getContext('2d');
+  let W, H, branches;
+  const V = getComputedStyle(document.documentElement);
+  const violet = '143,138,255', mint = '126,232,192';
+  const init = () => {
+    W = cv.width = innerWidth * devicePixelRatio;
+    H = cv.height = innerHeight * devicePixelRatio;
+    cv.style.width = innerWidth + 'px';
+    cv.style.height = innerHeight + 'px';
+    const n = Math.max(5, Math.floor(innerWidth / 220));
+    branches = Array.from({length: n}, () => spawn());
+  };
+  const spawn = () => ({
+    x: Math.random() * W,
+    y: H + Math.random() * H * .5,
+    vy: (0.18 + Math.random() * .3) * devicePixelRatio,
+    drift: (Math.random() - .5) * .22 * devicePixelRatio,
+    seg: 0,
+    segLen: (60 + Math.random() * 140) * devicePixelRatio,
+    dots: [],
+    col: Math.random() < .22 ? mint : violet,
+    a: .10 + Math.random() * .16
+  });
+  const step = () => {
+    ctx.clearRect(0, 0, W, H);
+    ctx.lineWidth = 1 * devicePixelRatio;
+    branches.forEach((b, i) => {
+      b.y -= b.vy;
+      b.x += b.drift;
+      b.seg += b.vy;
+      if (b.seg > b.segLen) {           /* branch: commit dot + maybe fork */
+        b.seg = 0;
+        b.dots.push({x: b.x, y: b.y, r: 0});
+        if (Math.random() < .3) b.drift = (Math.random() - .5) * .5 * devicePixelRatio;
+      }
+      /* trail */
+      ctx.strokeStyle = `rgba(${b.col},${b.a})`;
+      ctx.beginPath();
+      ctx.moveTo(b.x - b.drift * 90, b.y + b.vy * 90);
+      ctx.lineTo(b.x, b.y);
+      ctx.stroke();
+      /* dots */
+      b.dots = b.dots.filter(d => d.y > -20);
+      b.dots.forEach(d => {
+        d.y -= b.vy; d.r = Math.min(d.r + .08, 2.4 * devicePixelRatio);
+        ctx.fillStyle = `rgba(${b.col},${b.a * 2.2})`;
+        ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, 7); ctx.fill();
+      });
+      if (b.y < -H * .2) branches[i] = spawn();
+    });
+    requestAnimationFrame(step);
+  };
+  init();
+  addEventListener('resize', init);
+  requestAnimationFrame(step);
+})();
+
+/* ---------- spine fill + nodes ---------- */
+(() => {
+  const spine = document.getElementById('spine');
+  if (!spine || innerWidth <= 900) {}
+  const fill = document.getElementById('spineFill');
+  const mprog = document.getElementById('mprog');
+  const sections = [...document.querySelectorAll('[data-node]')];
+  const nodes = sections.map(sec => {
+    const n = document.createElement('div');
+    n.className = 'node';
+    n.dataset.label = sec.dataset.node;
+    spine.appendChild(n);
+    return n;
+  });
+  const layout = () => {
+    sections.forEach((sec, i) => {
+      const rect = sec.getBoundingClientRect();
+      const top = rect.top + scrollY;
+      const docH = document.documentElement.scrollHeight;
+      nodes[i].style.top = ((top + Math.min(rect.height * .12, 160)) / docH * 100) + '%';
+    });
+  };
+  const paint = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const p = max > 0 ? scrollY / max : 0;
+    fill.style.height = (p * 100) + '%';
+    if (mprog) mprog.style.width = (p * 100) + '%';
+    const fillBottomDoc = p * document.documentElement.scrollHeight;
+    nodes.forEach(n => {
+      const nodeDoc = parseFloat(n.style.top) / 100 * document.documentElement.scrollHeight;
+      n.classList.toggle('lit', fillBottomDoc >= nodeDoc || scrollY + innerHeight * .5 >= nodeDoc);
+    });
+  };
+  layout(); paint();
+  addEventListener('scroll', () => requestAnimationFrame(paint), {passive:true});
+  addEventListener('resize', () => { layout(); paint(); });
+  /* re-layout after expand/collapse changes doc height */
+  new MutationObserver(() => { layout(); paint(); })
+    .observe(document.body, {attributes:true, subtree:true, attributeFilter:['class']});
+})();
+
+/* ---------- reveal + counters ---------- */
+const countUp = el => {
+  const target = parseFloat(el.dataset.count);
+  const dec = parseInt(el.dataset.dec || 0);
+  if (reduced || target === 0) { el.textContent = target.toFixed(dec); return; }
+  const dur = 1300, start = performance.now();
+  const stepFn = now => {
+    const p = Math.min((now - start) / dur, 1);
+    el.textContent = (target * (1 - Math.pow(1 - p, 3))).toFixed(dec);
+    if (p < 1) requestAnimationFrame(stepFn);
+  };
+  requestAnimationFrame(stepFn);
+};
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) {
+    e.target.classList.add('in');
+    e.target.querySelectorAll('[data-count]').forEach(countUp);
+    io.unobserve(e.target);
+  }
+}), {threshold:.15});
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+/* ---------- job expand ---------- */
+document.querySelectorAll('.job').forEach(j => {
+  const toggle = () => {
+    const open = j.classList.toggle('open');
+    j.setAttribute('aria-expanded', open);
+    j.querySelector('.cue').textContent = open ? '− collapse' : '+ expand';
+  };
+  j.addEventListener('click', e => { if (e.target.tagName !== 'A') toggle(); });
+  j.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+});
+</script>
+</body>
+</html>

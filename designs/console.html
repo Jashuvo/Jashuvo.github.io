@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jubayed Ahmed — DevOps & Full-Stack Engineer</title>
+<meta name="description" content="DevOps & full-stack engineer in Chattogram, Bangladesh. AWS, CI/CD, containers — and complete products shipped solo, end to end.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,400..900&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Hind+Siliguri:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#120d06;--bg-2:#1a1309;--bg-3:#241a0d;
+  --amber:#ffab2e;--amber-hot:#ffd489;--amber-dim:rgba(255,171,46,.55);--amber-faint:rgba(255,171,46,.22);--amber-ghost:rgba(255,171,46,.10);
+  --paper:#f3e7cf;--paper-dim:rgba(243,231,207,.58);--paper-faint:rgba(243,231,207,.30);
+  --ok:#8fd66a;--line:rgba(255,171,46,.16);--line-strong:rgba(255,171,46,.38);
+  --disp:'Big Shoulders',sans-serif;--mono:'IBM Plex Mono',monospace;--bn:'Hind Siliguri',sans-serif;
+  --gutter:clamp(20px,4.2vw,72px);--glow:0 0 18px rgba(255,171,46,.35);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--paper);font-family:var(--mono);font-weight:300;line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:var(--amber);color:var(--bg)}
+a{color:inherit;text-decoration:none}
+a:focus-visible,[role=button]:focus-visible,button:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+.scanlines{position:fixed;inset:0;pointer-events:none;z-index:80;opacity:.5;background:repeating-linear-gradient(to bottom, rgba(255,171,46,.028) 0 1px, transparent 1px 4px)}
+.vignette{position:fixed;inset:0;pointer-events:none;z-index:79;background:radial-gradient(ellipse at center, transparent 58%, rgba(0,0,0,.42) 100%)}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:78;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:14px var(--gutter);font-size:11px;letter-spacing:.16em;text-transform:uppercase;background:linear-gradient(to bottom, rgba(18,13,6,.92), rgba(18,13,6,0))}
+.topbar .brand{font-weight:600;color:var(--amber);text-shadow:var(--glow)}
+.topbar .brand .bn{font-family:var(--bn);text-transform:none;letter-spacing:0;color:var(--paper-dim);margin-left:10px;font-weight:500}
+.topbar nav{display:flex;gap:clamp(14px,3vw,34px)}
+.topbar nav a{color:var(--paper-dim);transition:color .2s,text-shadow .2s}
+.topbar nav a:hover{color:var(--amber);text-shadow:var(--glow)}
+.topbar .clock{color:var(--paper-faint)}
+@media(max-width:760px){.topbar .clock{display:none}.topbar nav{gap:12px}}
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:96px var(--gutter) 40px;position:relative}
+.hero .sys-line{display:flex;flex-wrap:wrap;gap:10px 26px;align-items:center;font-size:clamp(10px,1.1vw,12px);letter-spacing:.18em;text-transform:uppercase;color:var(--paper-dim);margin-bottom:clamp(18px,3vh,30px)}
+.hero .sys-line .ok{color:var(--ok)}
+.hero .sys-line .ok::before{content:'';display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ok);margin-right:9px;box-shadow:0 0 10px var(--ok);animation:blink 2s infinite}
+@keyframes blink{50%{opacity:.25}}
+.hero h1{font-family:var(--disp);font-weight:840;font-variation-settings:'opsz' 72;font-size:clamp(4.2rem,17.5vw,17rem);line-height:.82;letter-spacing:.005em;text-transform:uppercase;color:var(--amber);text-shadow:0 0 32px rgba(255,171,46,.30)}
+.hero h1 .row{display:block;overflow:hidden;padding-bottom:.05em}
+.hero h1 .row span{display:inline-block;transform:translateY(112%);animation:rise .9s cubic-bezier(.16,.8,.24,1) forwards}
+.hero h1 .row:nth-child(2) span{animation-delay:.12s;color:var(--paper)}
+@keyframes rise{to{transform:translateY(0)}}
+.hero .bn-echo{font-family:var(--bn);font-weight:500;font-size:clamp(1.2rem,2.6vw,1.9rem);color:var(--amber-dim);margin-top:14px;letter-spacing:.04em}
+.hero .bn-echo i{font-style:normal;color:var(--paper-faint);font-family:var(--mono);font-size:.62em;letter-spacing:.2em;text-transform:uppercase;margin-left:14px}
+.console{margin-top:clamp(26px,5vh,52px);border:1px solid var(--line-strong);background:rgba(26,19,9,.6);display:grid;grid-template-columns:1fr auto}
+.console .feed{padding:16px 20px;font-size:clamp(11px,1.2vw,13px);color:var(--paper-dim);min-height:52px;display:flex;align-items:center;overflow:hidden;white-space:nowrap}
+.console .feed .prompt{color:var(--amber);margin-right:12px;text-shadow:var(--glow)}
+.console .feed .cursor{display:inline-block;width:8px;height:1.1em;background:var(--amber);margin-left:4px;vertical-align:text-bottom;animation:blink 1s steps(1) infinite;box-shadow:var(--glow)}
+.console .uptime{border-left:1px solid var(--line-strong);padding:16px 22px;text-align:right;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--paper-faint)}
+.console .uptime b{display:block;color:var(--amber);font-weight:500;font-size:clamp(13px,1.5vw,16px);letter-spacing:.08em;text-shadow:var(--glow);font-variant-numeric:tabular-nums}
+@media(max-width:700px){.console{grid-template-columns:1fr}.console .uptime{border-left:none;border-top:1px solid var(--line-strong);text-align:left}}
+.hero .intro{margin-top:clamp(22px,4vh,40px);max-width:62ch;color:var(--paper-dim);font-size:clamp(.92rem,1.3vw,1.02rem)}
+.hero .intro b{color:var(--paper);font-weight:500}
+section{padding:clamp(80px,13vh,160px) var(--gutter);position:relative}
+.sec-head{margin-bottom:clamp(36px,6vh,72px)}
+.sec-head .path{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber-dim);margin-bottom:14px;display:block}
+.sec-head .path::before{content:'» ';color:var(--amber)}
+.sec-head h2{font-family:var(--disp);font-weight:800;font-variation-settings:'opsz' 72;font-size:clamp(2.6rem,7.5vw,6rem);line-height:.9;letter-spacing:.005em;text-transform:uppercase}
+.sec-head h2 .bn{font-family:var(--bn);font-weight:500;font-size:.34em;color:var(--amber-dim);text-transform:none;margin-left:.7em;vertical-align:.35em;letter-spacing:.02em}
+.deploys{border-top:1px solid var(--line)}
+.deploy{border:1px solid var(--line);margin-bottom:14px;background:rgba(26,19,9,.35);cursor:pointer;transition:border-color .25s, box-shadow .25s, background .25s;position:relative}
+.deploy:hover{border-color:var(--line-strong);box-shadow:0 0 0 1px var(--amber-ghost), 0 0 28px rgba(255,171,46,.07);background:rgba(26,19,9,.55)}
+.deploy .head{display:grid;grid-template-columns:minmax(84px,110px) 1fr auto auto;gap:clamp(12px,2.6vw,36px);align-items:center;padding:clamp(18px,2.8vh,26px) clamp(16px,2.4vw,26px)}
+.deploy .id{font-size:11px;letter-spacing:.12em;color:var(--paper-faint)}
+.deploy .id b{display:block;color:var(--amber);font-weight:500;font-size:12.5px;margin-bottom:3px}
+.deploy h3{font-family:var(--disp);font-weight:760;font-variation-settings:'opsz' 60;font-size:clamp(1.5rem,3.6vw,2.6rem);line-height:.95;letter-spacing:.01em;text-transform:uppercase;transition:color .2s}
+.deploy:hover h3{color:var(--amber);text-shadow:var(--glow)}
+.deploy h3 .bn{font-family:var(--bn);font-weight:500;font-size:.5em;color:var(--paper-dim);text-transform:none;margin-left:.5em}
+.deploy .env{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--paper-faint);text-align:right;line-height:1.8}
+.badge{font-size:10px;letter-spacing:.16em;text-transform:uppercase;border:1px solid var(--line-strong);padding:6px 12px;white-space:nowrap}
+.badge.stable{color:var(--ok);border-color:rgba(143,214,106,.4)}
+.badge.building{color:var(--amber);border-color:var(--line-strong);text-shadow:var(--glow)}
+.badge.building::before{content:'▲ ';animation:blink 1.3s infinite}
+.badge.staged{color:var(--paper-faint)}
+.deploy .body{max-height:0;overflow:hidden;opacity:0;transition:max-height .55s cubic-bezier(.16,.8,.24,1),opacity .4s}
+.deploy.open .body{max-height:760px;opacity:1}
+.deploy .body-inner{border-top:1px dashed var(--line);padding:clamp(20px,3vh,30px) clamp(16px,2.4vw,26px);display:grid;grid-template-columns:1.2fr .8fr;gap:26px 48px}
+@media(max-width:840px){.deploy .body-inner{grid-template-columns:1fr}}
+.deploy .body p.summary{color:var(--paper-dim);font-size:.94rem;grid-column:1/-1;max-width:75ch;margin-bottom:2px}
+.deploy h4{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;font-weight:500;text-shadow:var(--glow)}
+.deploy .log{list-style:none;font-size:.88rem;color:var(--paper-dim)}
+.deploy .log li{padding:6px 0 6px 20px;position:relative;border-bottom:1px dashed var(--line)}
+.deploy .log li:last-child{border:none}
+.deploy .log li::before{content:'›';position:absolute;left:0;color:var(--amber)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{font-size:10.5px;letter-spacing:.06em;border:1px solid var(--line);padding:5px 11px;color:var(--paper-dim);background:rgba(11,14,26,.5)}
+.deploy .toggle-cue{position:absolute;right:clamp(16px,2.4vw,26px);bottom:10px;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--paper-faint);transition:color .2s}
+.deploy:hover .toggle-cue{color:var(--amber)}
+@media(max-width:840px){.deploy .head{grid-template-columns:1fr auto}.deploy .id{grid-column:1/-1;display:flex;gap:14px}.deploy .id b{margin:0}.deploy .env{display:none}}
+.history{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.timeline{position:relative;margin-bottom:clamp(40px,7vh,64px)}
+.timeline .years{display:grid;grid-template-columns:repeat(8,1fr);font-size:10px;letter-spacing:.12em;color:var(--paper-faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:22px}
+.tl-row{display:grid;grid-template-columns:minmax(120px,200px) 1fr;gap:clamp(14px,3vw,40px);align-items:center;margin-bottom:20px}
+@media(max-width:700px){.tl-row{grid-template-columns:1fr;gap:8px;margin-bottom:26px}}
+.tl-row .who{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--paper-dim)}
+.tl-row .who b{display:block;color:var(--paper);font-weight:500}
+.tl-track{height:26px;position:relative;background:repeating-linear-gradient(90deg, transparent 0 calc(20% - 1px), var(--line) calc(20% - 1px) 20%)}
+.tl-bar{position:absolute;top:0;bottom:0;background:linear-gradient(90deg, rgba(255,171,46,.18), rgba(255,171,46,.45));border:1px solid var(--line-strong);display:flex;align-items:center;padding:0 10px;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-hot);white-space:nowrap;overflow:hidden;transform-origin:left;transform:scaleX(0);transition:transform 1.1s cubic-bezier(.16,.8,.24,1)}
+.in .tl-bar{transform:scaleX(1)}
+.tl-bar.live{background:linear-gradient(90deg, rgba(255,171,46,.25), rgba(255,171,46,.6));box-shadow:0 0 20px rgba(255,171,46,.18)}
+.post{border-top:1px solid var(--line);display:grid;grid-template-columns:minmax(140px,220px) 1fr;gap:clamp(18px,4vw,60px);padding:clamp(28px,4.5vh,48px) 0}
+.post:last-of-type{border-bottom:1px solid var(--line)}
+@media(max-width:760px){.post{grid-template-columns:1fr;gap:12px}}
+.post .term{font-size:11.5px;letter-spacing:.12em;color:var(--paper-faint);text-transform:uppercase;line-height:2}
+.post .term b{color:var(--amber);font-weight:500;display:block}
+.post h3{font-family:var(--disp);font-weight:760;font-variation-settings:'opsz' 60;font-size:clamp(1.6rem,3.4vw,2.5rem);letter-spacing:.01em;line-height:1;text-transform:uppercase}
+.post .role{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-dim);margin:10px 0 18px}
+.post ul{list-style:none;max-width:72ch}
+.post li{padding:8px 0 8px 22px;border-bottom:1px dashed var(--line);color:var(--paper-dim);font-size:.92rem;position:relative}
+.post li::before{content:'›';position:absolute;left:0;color:var(--amber);top:8px}
+.post li:last-child{border:none}
+.post li b{color:var(--amber-hot);font-weight:500}
+.creds{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:clamp(38px,6vh,60px)}
+.cred{border:1px solid var(--line);padding:22px 20px;background:rgba(26,19,9,.35)}
+.cred h5{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:10px;font-weight:500;text-shadow:var(--glow)}
+.cred p{font-size:.88rem;color:var(--paper-dim)}
+.cred p b{color:var(--paper);font-weight:500;display:block;margin-bottom:3px}
+.cred .bn-mark{font-family:var(--bn);color:var(--amber-dim)}
+.panel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.panel{border:1px solid var(--line);background:rgba(26,19,9,.35);padding:clamp(24px,3.4vw,40px);position:relative;overflow:hidden}
+.panel .bn-big{position:absolute;right:2px;bottom:-24px;font-family:var(--bn);font-weight:600;font-size:7.5rem;line-height:1;color:var(--amber-ghost);pointer-events:none;user-select:none}
+.panel h3{font-family:var(--disp);font-weight:760;font-variation-settings:'opsz' 60;text-transform:uppercase;font-size:clamp(1.35rem,2.3vw,1.9rem);margin-bottom:18px;letter-spacing:.01em}
+.panel ul{list-style:none;position:relative;z-index:1}
+.panel li{padding:9px 0;border-bottom:1px dashed var(--line);color:var(--paper-dim);font-size:.9rem;display:flex;justify-content:space-between;gap:14px}
+.panel li:last-child{border:none}
+.panel li em{font-style:normal;font-size:9.5px;letter-spacing:.08em;color:var(--paper-faint);text-transform:uppercase;padding-top:4px;white-space:nowrap;text-align:right}
+.ethos blockquote{font-family:var(--disp);font-weight:700;font-variation-settings:'opsz' 72;font-size:clamp(2rem,5.6vw,4.4rem);line-height:1.02;letter-spacing:.005em;text-transform:uppercase;max-width:22ch}
+.ethos blockquote em{font-style:normal;color:var(--amber);text-shadow:0 0 26px rgba(255,171,46,.35)}
+.ethos .bn-line{font-family:var(--bn);font-weight:500;color:var(--amber-dim);font-size:clamp(1.05rem,2vw,1.35rem);margin-top:28px}
+.ethos .bn-line span{color:var(--paper-faint);font-family:var(--mono);font-size:.66em;letter-spacing:.16em;margin-left:16px;text-transform:uppercase}
+.contact{border-top:1px solid var(--line);min-height:86svh;display:flex;flex-direction:column;justify-content:center}
+.contact .status-line{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--paper-dim);margin-bottom:26px}
+.contact .status-line .ok{color:var(--ok)}
+.contact h2{font-family:var(--disp);font-weight:840;font-variation-settings:'opsz' 72;text-transform:uppercase;font-size:clamp(2.8rem,11.5vw,11rem);line-height:.85;letter-spacing:.005em}
+.contact h2 a{color:var(--amber);text-shadow:0 0 30px rgba(255,171,46,.3);position:relative;display:inline-block;transition:color .25s}
+.contact h2 a:hover{color:var(--amber-hot)}
+.contact h2 a::after{content:'';position:absolute;left:0;bottom:.02em;width:100%;height:.045em;background:var(--amber);transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.16,.8,.24,1);box-shadow:var(--glow)}
+.contact h2 a:hover::after{transform:scaleX(1)}
+.contact .links{display:flex;gap:clamp(16px,4vw,44px);margin-top:clamp(32px,5.5vh,58px);flex-wrap:wrap;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.contact .links a{color:var(--paper-dim);border-bottom:1px solid var(--line-strong);padding-bottom:5px;transition:color .2s,border-color .2s,text-shadow .2s}
+.contact .links a:hover{color:var(--amber);border-color:var(--amber);text-shadow:var(--glow)}
+.footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:24px var(--gutter);border-top:1px solid var(--line);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--paper-faint)}
+.footer .bn{font-family:var(--bn);text-transform:none;font-weight:500}
+.rv{opacity:0;transform:translateY(34px);transition:opacity .85s ease,transform .85s cubic-bezier(.16,.8,.24,1)}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}html{scroll-behavior:auto}.rv{opacity:1;transform:none}.hero h1 .row span{transform:none}#boot{display:none}.tl-bar,.in .tl-bar{transform:scaleX(1)}}
+</style>
+</head>
+<body>
+<div class="scanlines" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+<header class="topbar">
+  <a class="brand" href="#top">OPS://JUBAYED<span class="bn">জোবায়েদ</span></a>
+  <nav><a href="#deployments">Deployments</a><a href="#history">History</a><a href="#panel">Instruments</a><a href="#contact">Channel</a></nav>
+  <span class="clock" id="ctg-clock">CTG --:--:--</span>
+</header>
+<main id="top">
+<section class="hero" aria-label="Introduction">
+  <div class="sys-line"><span class="ok">System operational</span><span>Chattogram · BD · 22.35°N 91.78°E</span><span>DevOps · Cloud · Full-stack</span></div>
+  <h1><span class="row"><span>Jubayed</span></span><span class="row"><span>Ahmed</span></span></h1>
+  <p class="bn-echo">জোবায়েদ আহমেদ <i>// Operator on duty</i></p>
+  <div class="console" role="log" aria-label="Career event feed">
+    <div class="feed"><span class="prompt">jubayed@ctg:~$</span><span id="feedText"></span><span class="cursor"></span></div>
+    <div class="uptime">Career uptime<b id="uptime">—</b></div>
+  </div>
+  <p class="intro"><b>One engineer. The whole stack.</b> I keep production systems alive on AWS, build the CI/CD pipelines that carry software to release, and ship complete products of my own — Android, Flutter, and full-stack web — end to end, solo, from the port city of Chattogram.</p>
+</section>
+
+<section class="deploys" id="deployments">
+  <div class="sec-head rv"><span class="path">ops://jubayed/deployments</span><h2>Deployments<span class="bn">প্রকল্পসমূহ</span></h2></div>
+
+  <article class="deploy rv" tabindex="0" role="button" aria-expanded="false">
+    <div class="head"><div class="id"><b>DEP-001</b>2025–26</div><h3>Banking CI/CD Migration</h3><div class="env">Enterprise<br>Regulated</div><span class="badge stable">Stable</span></div>
+    <div class="body"><div class="body-inner">
+      <p class="summary">Consulting on a digital-banking client's migration from Azure DevOps to GitLab CI/CD — authoring pipelines, registering Windows Shell Runners across locked-down RDP jump-host chains, and automating IIS deployment for ASP.NET applications across four environments.</p>
+      <div><h4>Deploy log</h4><ul class="log"><li>Pipelines authored for build → test → deploy across Dev / QA / UAT / Prod</li><li>Runners installed on air-gapped internal servers via multi-hop RDP</li><li>web.config transformation mechanism reverse-engineered; correct GitLab-equivalent approach documented</li><li>Solution annex adopted by the client team</li></ul></div>
+      <div><h4>Stack</h4><div class="chips"><span>GitLab CI/CD</span><span>PowerShell</span><span>IIS</span><span>ASP.NET</span><span>Windows Runners</span></div><p style="margin-top:16px;font-size:.88rem;color:var(--paper-dim)">Regulated-industry constraints, zero-downtime expectations — DevOps where mistakes are expensive.</p></div>
+    </div></div>
+    <span class="toggle-cue">+ Expand log</span>
+  </article>
+
+  <article class="deploy rv" tabindex="0" role="button" aria-expanded="false">
+    <div class="head"><div class="id"><b>DEP-002</b>2026</div><h3>MoneyMan<span class="bn">টাকা</span></h3><div class="env">Native Android<br>Fintech</div><span class="badge building">Building</span></div>
+    <div class="body"><div class="body-inner">
+      <p class="summary">A personal finance app built to replace four years of daily dependence on a commercial app — migrating ~4,000 real transactions from a reverse-engineered SQLite backup into an offline-first, precision-safe ledger of my own design.</p>
+      <div><h4>Deploy log</h4><ul class="log"><li>Proprietary .mmbak SQLite backup format reverse-engineered for lossless migration</li><li>All money stored as integer paisa — zero floating-point drift across 4,000+ records</li><li>First-class debt &amp; savings tracking, not bolted-on categories</li><li>Timezone-correct throughout — a detail most finance apps get wrong</li></ul></div>
+      <div><h4>Stack &amp; roadmap</h4><div class="chips"><span>Kotlin</span><span>Jetpack Compose</span><span>Room</span><span>SQLite</span><span>Material 3</span></div><p style="margin-top:16px;font-size:.88rem;color:var(--paper-dim)">V2 roadmap: widgets, full-text search, budgets, biometric lock, Bengali localisation — a seven-phase build with agent-ready documentation.</p></div>
+    </div></div>
+    <span class="toggle-cue">+ Expand log</span>
+  </article>
+
+  <article class="deploy rv" tabindex="0" role="button" aria-expanded="false">
+    <div class="head"><div class="id"><b>DEP-003</b>2026</div><h3>Ta'allam<span class="bn">তাআল্লাম</span></h3><div class="env">Mobile<br>EdTech</div><span class="badge building">Building</span></div>
+    <div class="body"><div class="body-inner">
+      <p class="summary">An offline-first Arabic learning app for Bengali-speaking learners — Duolingo-style progression with dual Conversational and Quranic tracks.</p>
+      <div><h4>Deploy log</h4><ul class="log"><li>Dual-track curriculum: everyday Arabic and Quranic Arabic</li><li>Offline-first architecture for low-connectivity users across Bangladesh</li><li>AI-assisted content pipeline converting source PDFs into structured lessons</li><li>Public and in active development on GitHub</li></ul></div>
+      <div><h4>Stack</h4><div class="chips"><span>Flutter</span><span>Riverpod</span><span>Supabase</span><span>Gemini API</span></div><p style="margin-top:16px;font-size:.88rem;color:var(--paper-dim)">Every architectural choice targets zero marginal cost per learner — infrastructure engineered to scale before revenue does.</p></div>
+    </div></div>
+    <span class="toggle-cue">+ Expand log</span>
+  </article>
+
+  <article class="deploy rv" tabindex="0" role="button" aria-expanded="false">
+    <div class="head"><div class="id"><b>DEP-004</b>2025</div><h3>Encrypted Digital Library</h3><div class="env">Full-stack<br>Security</div><span class="badge stable">Stable</span></div>
+    <div class="body"><div class="body-inner">
+      <p class="summary">A private digital library platform for a medical university — AES-256-GCM encrypted content delivery, in-browser PDF and EPUB reading, and role-based access control, containerised for on-premise deployment.</p>
+      <div><h4>Deploy log</h4><ul class="log"><li>Content encrypted at rest; decrypted only for authorised readers</li><li>In-browser reading via PDF.js and epub.js — no downloads, no leakage</li><li>Role-based access for students, faculty, and librarians</li><li>Fully Dockerised for the university's own infrastructure</li></ul></div>
+      <div><h4>Stack</h4><div class="chips"><span>Node.js</span><span>Express</span><span>React</span><span>PostgreSQL</span><span>Docker</span><span>AES-256-GCM</span></div></div>
+    </div></div>
+    <span class="toggle-cue">+ Expand log</span>
+  </article>
+
+  <article class="deploy rv" tabindex="0" role="button" aria-expanded="false">
+    <div class="head"><div class="id"><b>DEP-005</b>2025</div><h3>Invoice &amp; Inventory PWA</h3><div class="env">PWA<br>Zero-cost infra</div><span class="badge stable">Stable</span></div>
+    <div class="body"><div class="body-inner">
+      <p class="summary">A complete invoicing and inventory system for an internet &amp; CCTV service company — running entirely in the browser with local-first storage, deployed serverless on GitHub Pages.</p>
+      <div><h4>Deploy log</h4><ul class="log"><li>IndexedDB via Dexie.js — the client's data never leaves their device</li><li>Installable PWA: works offline, feels native</li><li>Static hosting: no server bills, no maintenance contract, no downtime</li></ul></div>
+      <div><h4>Stack</h4><div class="chips"><span>Vite</span><span>React</span><span>Dexie.js</span><span>PWA</span><span>GitHub Pages</span></div></div>
+    </div></div>
+    <span class="toggle-cue">+ Expand log</span>
+  </article>
+
+  <article class="deploy rv" tabindex="0" role="button" aria-expanded="false">
+    <div class="head"><div class="id"><b>DEP-006</b>2026</div><h3>Real Estate Platform</h3><div class="env">Platform<br>Proptech</div><span class="badge staged">Staged</span></div>
+    <div class="body"><div class="body-inner">
+      <p class="summary">A business management platform for a Bangladeshi real estate firm — admin panels, property and client workflows, and mapping, architected end-to-end on free-tier cloud infrastructure.</p>
+      <div><h4>Deploy log</h4><ul class="log"><li>FilamentPHP admin architecture for rapid, robust back-office tooling</li><li>Infrastructure engineered to free tiers: Oracle Cloud compute, Cloudflare R2, OpenStreetMap</li><li>Scoped, quoted, and architected solo — from requirements to delivery plan</li></ul></div>
+      <div><h4>Stack</h4><div class="chips"><span>Laravel</span><span>FilamentPHP</span><span>Oracle Cloud</span><span>Cloudflare R2</span><span>OpenStreetMap</span></div></div>
+    </div></div>
+    <span class="toggle-cue">+ Expand log</span>
+  </article>
+
+  <article class="deploy rv" tabindex="0" role="button" aria-expanded="false">
+    <div class="head"><div class="id"><b>DEP-007</b>Ongoing</div><h3>Ops Automation Suite</h3><div class="env">Automation<br>Internal</div><span class="badge stable">Stable</span></div>
+    <div class="body"><div class="body-inner">
+      <p class="summary">The unglamorous work that compounds: automated tenant billing for a 15-flat rental portfolio, and a real-time customer-support monitor that polls an authenticated API and pipes alerts straight to Telegram.</p>
+      <div><h4>Deploy log</h4><ul class="log"><li>Hours of monthly manual billing collapsed into a scheduled job</li><li>Support messages surfaced in seconds instead of on next login</li><li>Built with the cheapest tool that works — Apps Script, cron, webhooks</li></ul></div>
+      <div><h4>Stack</h4><div class="chips"><span>Google Apps Script</span><span>Telegram Bot API</span><span>Webhooks</span></div></div>
+    </div></div>
+    <span class="toggle-cue">+ Expand log</span>
+  </article>
+</section>
+
+<section class="history" id="history">
+  <div class="sec-head rv"><span class="path">ops://jubayed/service-history</span><h2>Service History<span class="bn">কর্মজীবন</span></h2></div>
+  <div class="timeline rv">
+    <div class="years"><span>2019</span><span>2020</span><span>2021</span><span>2022</span><span>2023</span><span>2024</span><span>2025</span><span>2026</span></div>
+    <div class="tl-row"><div class="who"><b>Leadsoft Bangladesh</b>Trainee · Game Dev</div><div class="tl-track"><div class="tl-bar" style="left:0%;width:7%">Nov 19 – Apr 20</div></div></div>
+    <div class="tl-row"><div class="who"><b>Mulytic Labs GmbH</b>Technical Support Eng.</div><div class="tl-track"><div class="tl-bar" style="left:25%;width:3%">Intern</div><div class="tl-bar" style="left:29%;width:19%">Full-time</div></div></div>
+    <div class="tl-row"><div class="who"><b>Digitgiants</b>Software Engineer</div><div class="tl-track"><div class="tl-bar live" style="left:46%;width:54%">Feb 2023 — Present ▮</div></div></div>
+    <div class="tl-row"><div class="who"><b>Neosis-IT Solutions</b>DevOps Engineer</div><div class="tl-track"><div class="tl-bar live" style="left:93%;width:7%">May 26 ▮</div></div></div>
+  </div>
+
+  <article class="post rv">
+    <div class="term"><b>May 2026 — Present</b>Remote</div>
+    <div><h3>Neosis-IT Solutions</h3><p class="role">DevOps Engineer · Full-time</p>
+      <ul><li>Currently serving as DevOps Engineer, managing infrastructure, CI/CD pipelines, and cloud operations remotely</li><li>Applying hands-on experience with AWS, Docker, and monitoring tooling to production environments</li></ul>
+    </div>
+  </article>
+
+  <article class="post rv">
+    <div class="term"><b>Feb 2023 — Present</b>Bangladesh · Remote</div>
+    <div><h3>Digitgiants</h3><p class="role">Software Engineer · Full-time · 3 yrs 5 mos</p>
+      <ul><li>Full-stack software engineering across Python, FastAPI, and five additional skill domains</li><li>Building and maintaining production web services and APIs in a remote-first engineering team</li><li>Concurrent with independent product development (MoneyMan, Ta'allam) and DevOps consulting</li></ul>
+    </div>
+  </article>
+
+  <article class="post rv">
+    <div class="term"><b>Aug 2021 — Jan 2023</b>Germany · Remote</div>
+    <div><h3>Mulytic Labs GmbH</h3><p class="role">Technical Support Engineer · 1 yr 6 mos (incl. 3-month internship)</p>
+      <ul><li>Maintained smart infrastructure remotely using <b>ELK Stack, Grafana, Prometheus, Jira, Kibana, Balena</b> and more</li><li>Administered Linux production servers — configuration, optimisation, and security hardening for <b>99.9% uptime</b></li><li>Configured Nginx reverse proxies, SSL, and DNS setups across multiple production environments</li><li>Implemented and monitored AWS services and the ELK Stack — <b>40% faster data retrieval</b> and rapid log analysis</li><li>Began as a 3-month internship (Aug–Oct 2021) before converting to full-time (Nov 2021–Jan 2023)</li></ul>
+    </div>
+  </article>
+
+  <article class="post rv">
+    <div class="term"><b>Nov 2019 — Apr 2020</b>Bangladesh</div>
+    <div><h3>Leadsoft Bangladesh Limited</h3><p class="role">Trainee · Apprenticeship · 6 mos</p>
+      <ul><li>Game Developer apprenticeship — first professional exposure to software development and delivery workflows</li><li>Preceded eight Unity game prototypes built independently (2019–2020) that sharpened delivery instincts</li></ul>
+    </div>
+  </article>
+
+  <div class="creds rv">
+    <div class="cred"><h5>Education</h5><p><b>B.Sc. in Computer Science &amp; Engineering</b>International Islamic University Chittagong · 2013–2018</p></div>
+    <div class="cred"><h5>Thesis</h5><p><b>Noisy Health Data Integration with Privacy Preservation</b>Supervised by Dr. Shahidul Islam Khan</p></div>
+    <div class="cred"><h5>Publication</h5><p><b>Hybrid Feature Selection Algorithm to Support Health Data Warehousing</b>ICICCT 2019 · Istanbul, Turkey · Co-author</p></div>
+    <div class="cred"><h5>Languages</h5><p><b>Bengali <span class="bn-mark">বাংলা</span> · English</b>Native · Professional working proficiency</p></div>
+  </div>
+</section>
+
+<section id="panel">
+  <div class="sec-head rv"><span class="path">ops://jubayed/instruments</span><h2>Instrument Panel<span class="bn">দক্ষতা</span></h2></div>
+  <div class="panel-grid rv">
+    <div class="panel"><span class="bn-big" aria-hidden="true">যন্ত্র</span><h3>DevOps &amp; Cloud</h3>
+      <ul><li>AWS in production <em>ECS · ECR · EC2 · IAM</em></li><li>CI/CD pipeline design <em>GitHub Actions · GitLab · Azure</em></li><li>Containers <em>Docker · Compose</em></li><li>Monitoring &amp; observability <em>CloudWatch · ELK · Grafana</em></li><li>Linux server administration <em>Nginx · SSL · Hardening</em></li><li>IaC &amp; orchestration <em>Terraform · Kubernetes</em></li></ul>
+    </div>
+    <div class="panel"><span class="bn-big" aria-hidden="true">পণ্য</span><h3>Product Engineering</h3>
+      <ul><li>Native Android <em>Kotlin · Compose</em></li><li>Cross-platform mobile <em>Flutter · Riverpod</em></li><li>Full-stack web <em>Laravel · React · Node · .NET</em></li><li>Offline-first architecture <em>Room · Dexie · SQLite</em></li><li>Databases <em>PostgreSQL · MySQL · Elasticsearch</em></li></ul>
+    </div>
+    <div class="panel"><span class="bn-big" aria-hidden="true">বুদ্ধি</span><h3>AI-Native Workflow</h3>
+      <ul><li>Agent-ready documentation <em>Context files · Build plans</em></li><li>LLM content pipelines <em>Gemini · LangChain</em></li><li>Applied NLP research <em>BERT · Published author</em></li><li>Automation glue <em>Apps Script · Bots · Webhooks</em></li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="ethos">
+  <blockquote class="rv">Great software doesn't need a big team — it needs <em>one operator</em> who refuses to ship anything less.</blockquote>
+  <p class="bn-line rv">চট্টগ্রামে তৈরি, বিশ্বজুড়ে পৌঁছে <span>Built in Chattogram · Delivered worldwide</span></p>
+</section>
+
+<section class="contact" id="contact">
+  <div class="rv">
+    <p class="status-line"><span class="ok">● Channel open</span> — accepting select projects &amp; roles</p>
+    <h2>Open a<br><a href="mailto:jubayedsr@gmail.com">channel.</a></h2>
+    <div class="links">
+      <a href="mailto:jubayedsr@gmail.com">jubayedsr@gmail.com ↗</a>
+      <a href="https://www.linkedin.com/in/jashuvo/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="https://github.com/Jashuvo" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="tel:+8801401223871">+880 1401-223871 ↗</a>
+      <a href="../Jubayed_Ahmed_Resume.pdf" download="Jubayed_Ahmed_Resume.pdf">Resume ↓</a>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="footer">
+  <span>© 2026 Jubayed Ahmed · <span class="bn">জোবায়েদ আহমেদ</span></span>
+  <span>Designed &amp; built solo — no template, no team</span>
+  <span>Chattogram · 22.35°N 91.78°E</span>
+</footer>
+<script>
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const t0 = new Date('2019-11-01T00:00:00+06:00').getTime();
+const up = document.getElementById('uptime');
+const pad = n => String(n).padStart(2,'0');
+const tickUptime = () => {
+  let s = Math.floor((Date.now() - t0) / 1000);
+  const d = Math.floor(s / 86400); s -= d * 86400;
+  const h = Math.floor(s / 3600);  s -= h * 3600;
+  const m = Math.floor(s / 60);    s -= m * 60;
+  up.textContent = `${d}d ${pad(h)}h ${pad(m)}m ${pad(s)}s`;
+};
+tickUptime();
+if(!reduced) setInterval(tickUptime, 1000);
+const feed = document.getElementById('feedText');
+const events = ['deploy frequency +30% @ TNT Dash career predecessor','uptime 99.9% — Linux prod fleet @ Mulytic','ELK retrieval speed +40%','migrated 4,000 transactions → MoneyMan','gitlab-ci.yml → 4 environments, banking client','ta\u2019allam: arabic learning for bengali speakers, building','7 projects shipped solo since 2019','published @ ICICCT 2019, Istanbul'];
+if (reduced) { feed.textContent = events[0]; }
+else {
+  let ei = 0, ci = 0, erasing = false;
+  const typeFeed = () => {
+    const line = events[ei];
+    if (!erasing) {
+      ci++; feed.textContent = line.slice(0, ci);
+      if (ci === line.length) { erasing = true; setTimeout(typeFeed, 2400); return; }
+      setTimeout(typeFeed, 34 + Math.random() * 40);
+    } else {
+      ci -= 3; if (ci <= 0) { ci = 0; erasing = false; ei = (ei + 1) % events.length; }
+      feed.textContent = line.slice(0, Math.max(ci,0));
+      setTimeout(typeFeed, 14);
+    }
+  };
+  setTimeout(typeFeed, 2800);
+}
+const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold:.12});
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+document.querySelectorAll('.deploy').forEach(d => {
+  const toggle = () => {
+    const open = d.classList.toggle('open');
+    d.setAttribute('aria-expanded', open);
+    d.querySelector('.toggle-cue').textContent = open ? '− Collapse log' : '+ Expand log';
+  };
+  d.addEventListener('click', e => { if (e.target.tagName !== 'A') toggle(); });
+  d.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+});
+const tickClock = () => {
+  const t = new Date().toLocaleTimeString('en-GB',{timeZone:'Asia/Dhaka'});
+  const el = document.getElementById('ctg-clock');
+  if (el) el.textContent = 'CTG ' + t;
+};
+tickClock(); setInterval(tickClock, 1000);
+</script>
+</body>
+</html>

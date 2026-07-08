@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jubayed Ahmed — DevOps & Full-Stack Engineer</title>
+<meta name="description" content="DevOps & full-stack engineer in Chattogram, Bangladesh. CI/CD, AWS, containers — and complete products built solo, end to end.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500;700&family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#061f1a;--ink-2:#0a2922;--ink-3:#0f342b;
+  --line:rgba(214,228,216,.13);--line-strong:rgba(214,228,216,.30);
+  --cream:#f0ead9;--cream-dim:rgba(240,234,217,.60);--cream-faint:rgba(240,234,217,.34);
+  --red:#f2453f;--red-deep:#c22f2b;--jade:#72b199;
+  --disp:'Archivo',sans-serif;--serif:'Instrument Serif',serif;--mono:'JetBrains Mono',monospace;--bn:'Tiro Bangla',serif;
+  --gutter:clamp(20px,4.2vw,72px);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--cream);font-family:var(--disp);font-variation-settings:'wdth' 100;font-weight:340;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:var(--red);color:var(--cream)}
+a{color:inherit;text-decoration:none}
+a:focus-visible,[role=button]:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cream-faint)}
+.eyebrow b{color:var(--red);font-weight:400}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:70;opacity:.045;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+#sun{position:fixed;width:min(48vw,600px);height:min(48vw,600px);border-radius:50%;background:radial-gradient(circle at 37% 32%, #ff6157 0%, var(--red) 44%, var(--red-deep) 100%);z-index:0;pointer-events:none;will-change:transform;box-shadow:0 0 160px rgba(242,69,63,.26), 0 0 480px rgba(242,69,63,.13);top:-12%;right:-7%}
+main{position:relative;z-index:1}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:18px var(--gutter);font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;mix-blend-mode:difference}
+.topbar .brand{font-weight:700}
+.topbar .brand .bn{font-family:var(--bn);text-transform:none;letter-spacing:0;margin-left:8px;font-weight:400;opacity:.8}
+.topbar nav{display:flex;gap:clamp(14px,3vw,36px)}
+.topbar nav a{opacity:.72;transition:opacity .2s}
+.topbar nav a:hover{opacity:1}
+@media(max-width:760px){.topbar nav{gap:14px}}
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 var(--gutter) clamp(26px,4.5vh,58px);position:relative}
+.bn-echo{position:absolute;top:clamp(76px,15vh,150px);left:var(--gutter);font-family:var(--bn);font-size:clamp(2.4rem,7.5vw,6rem);line-height:1.14;color:transparent;-webkit-text-stroke:1px rgba(240,234,217,.26);pointer-events:none;user-select:none}
+.hero-meta{display:flex;flex-wrap:wrap;gap:8px 30px;margin-bottom:clamp(16px,3vh,32px);font-family:var(--mono);font-size:clamp(10px,1.1vw,12px);letter-spacing:.18em;text-transform:uppercase;color:var(--cream-dim)}
+.hero-meta .dot{color:var(--red)}
+.hero h1{font-weight:860;font-variation-settings:'wdth' 122;font-size:clamp(3.2rem,13.2vw,12.8rem);line-height:.86;letter-spacing:-.028em;text-transform:uppercase}
+.hero h1 .row{display:block;overflow:hidden;padding-bottom:.04em}
+.hero h1 .row span{display:inline-block;transform:translateY(112%);animation:rise 1s cubic-bezier(.16,.8,.24,1) forwards}
+.hero h1 .row:nth-child(2) span{animation-delay:.14s}
+.hero h1 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--red);text-transform:none;letter-spacing:-.01em;font-size:.94em}
+@keyframes rise{to{transform:translateY(0)}}
+.hero-foot{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;margin-top:clamp(20px,4vh,42px);flex-wrap:wrap}
+.hero-foot p{max-width:46ch;color:var(--cream-dim);font-size:clamp(.95rem,1.35vw,1.08rem)}
+.hero-foot p strong{color:var(--cream);font-weight:560}
+.scroll-cue{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--cream-faint);display:flex;align-items:center;gap:12px;white-space:nowrap}
+.scroll-cue::after{content:'';width:58px;height:1px;background:var(--red);animation:pulseline 2.2s ease-in-out infinite}
+@keyframes pulseline{0%,100%{transform:scaleX(1);opacity:1}50%{transform:scaleX(.35);opacity:.45}}
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:13px 0;background:rgba(6,31,26,.65)}
+.marquee-track{display:flex;width:max-content;animation:scrollx 40s linear infinite}
+.marquee-track span{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--cream-dim);padding:0 24px;white-space:nowrap}
+.marquee-track span i{font-style:normal;color:var(--red);padding-right:24px}
+@keyframes scrollx{to{transform:translateX(-50%)}}
+section{padding:clamp(76px,13vh,160px) var(--gutter)}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:clamp(38px,6.5vh,80px)}
+.sec-head h2{font-weight:820;font-variation-settings:'wdth' 118;font-size:clamp(2.1rem,5.8vw,4.8rem);line-height:.95;letter-spacing:-.024em;text-transform:uppercase}
+.sec-head h2 .bn{font-family:var(--bn);font-size:.44em;color:var(--jade);font-weight:400;text-transform:none;margin-left:.6em;vertical-align:.14em;letter-spacing:0}
+.manifest{border-top:1px solid var(--line);padding-top:clamp(60px,10vh,120px)}
+.cargo{border-bottom:1px solid var(--line);padding:clamp(28px,4.2vh,48px) 0;display:grid;grid-template-columns:minmax(96px,130px) 1fr auto;gap:clamp(16px,3vw,52px);align-items:start;cursor:pointer;position:relative;transition:background .3s}
+.cargo:first-of-type{border-top:1px solid var(--line)}
+.cargo:hover{background:linear-gradient(90deg,rgba(242,69,63,.055),transparent 58%)}
+.cargo .no{padding-top:8px}
+.cargo .no b{display:block;font-family:var(--mono);font-weight:500;font-size:13px;letter-spacing:.1em;margin-bottom:6px}
+.cargo .no i{font-style:normal;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--cream-faint);text-transform:uppercase;line-height:1.7;display:block}
+.cargo h3{font-weight:740;font-variation-settings:'wdth' 112;font-size:clamp(1.7rem,4.2vw,3.1rem);line-height:.98;letter-spacing:-.02em;text-transform:uppercase;transition:color .25s}
+.cargo:hover h3{color:var(--red)}
+.cargo h3 .bn{font-family:var(--bn);font-size:.58em;color:var(--cream-dim);font-weight:400;text-transform:none;margin-left:.45em;letter-spacing:0}
+.cargo .brief{color:var(--cream-dim);max-width:64ch;margin-top:12px;font-size:.97rem}
+.cargo .status{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;padding:7px 13px;border:1px solid var(--line-strong);border-radius:100px;white-space:nowrap;margin-top:6px;justify-self:end}
+.status.transit{color:var(--red);border-color:rgba(242,69,63,.5)}
+.status.transit::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--red);margin-right:8px;animation:blink 1.4s infinite}
+@keyframes blink{50%{opacity:.15}}
+.status.shipped{color:var(--jade);border-color:rgba(114,177,153,.42)}
+.status.docked{color:var(--cream-faint)}
+.cargo .hold{grid-column:2 / -1;max-height:0;overflow:hidden;opacity:0;transition:max-height .55s cubic-bezier(.16,.8,.24,1),opacity .4s}
+.cargo.open .hold{max-height:700px;opacity:1}
+.hold-inner{padding-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:26px 52px}
+@media(max-width:840px){.hold-inner{grid-template-columns:1fr}}
+.hold-inner h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:12px;font-weight:500}
+.hold-inner p,.hold-inner li{color:var(--cream-dim);font-size:.93rem}
+.hold-inner ul{list-style:none}
+.hold-inner li{padding:6px 0;border-bottom:1px dashed var(--line)}
+.hold-inner li:last-child{border:none}
+.stack-chips{display:flex;flex-wrap:wrap;gap:8px}
+.stack-chips span{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;border:1px solid var(--line);padding:5px 12px;border-radius:100px;color:var(--cream-dim)}
+.cargo .expand-cue{position:absolute;right:0;bottom:15px;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--cream-faint);transition:color .2s}
+.cargo:hover .expand-cue{color:var(--red)}
+@media(max-width:840px){.cargo{grid-template-columns:1fr;gap:12px;padding-right:0}.cargo .status{justify-self:start;order:-1;margin-top:0}.cargo .hold{grid-column:1}.cargo .expand-cue{position:static;margin-top:10px;display:inline-block}.cargo .no{display:flex;gap:14px;align-items:baseline;padding:0}}
+.service{background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.post{border-top:1px solid var(--line);display:grid;grid-template-columns:minmax(150px,230px) 1fr;gap:clamp(18px,4vw,64px);padding:clamp(30px,5vh,54px) 0}
+.post:last-of-type{border-bottom:1px solid var(--line)}
+@media(max-width:760px){.post{grid-template-columns:1fr;gap:14px}}
+.post .term{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--cream-faint);text-transform:uppercase;line-height:2}
+.post .term b{color:var(--red);font-weight:500;display:block}
+.post h3{font-weight:700;font-variation-settings:'wdth' 110;font-size:clamp(1.5rem,3.4vw,2.4rem);letter-spacing:-.015em;line-height:1.05;text-transform:uppercase}
+.post .role{font-family:var(--serif);font-style:italic;font-size:clamp(1.05rem,1.9vw,1.35rem);color:var(--jade);margin:8px 0 18px}
+.post ul{list-style:none;max-width:70ch}
+.post li{padding:8px 0 8px 22px;border-bottom:1px dashed var(--line);color:var(--cream-dim);font-size:.95rem;position:relative}
+.post li::before{content:'▸';position:absolute;left:0;color:var(--red);font-size:.8em;top:11px}
+.post li:last-child{border:none}
+.post li b{color:var(--cream);font-weight:560}
+.creds{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--line);margin-top:clamp(40px,7vh,72px)}
+.cred{background:var(--ink-2);padding:26px 24px}
+.cred h5{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:12px;font-weight:500}
+.cred p{font-size:.92rem;color:var(--cream-dim)}
+.cred p b{color:var(--cream);font-weight:560;display:block;margin-bottom:3px}
+.cred .bn-mark{font-family:var(--bn);color:var(--jade)}
+.caps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--line)}
+.cap{background:var(--ink);padding:clamp(28px,4vw,50px);position:relative;overflow:hidden}
+.cap .bn-big{position:absolute;right:-6px;bottom:-30px;font-family:var(--bn);font-size:8.4rem;line-height:1;color:transparent;-webkit-text-stroke:1px rgba(240,234,217,.09);pointer-events:none;user-select:none}
+.cap h3{font-weight:700;font-variation-settings:'wdth' 112;text-transform:uppercase;font-size:clamp(1.3rem,2.2vw,1.75rem);margin-bottom:18px;letter-spacing:-.01em}
+.cap ul{list-style:none;position:relative;z-index:1}
+.cap li{padding:9px 0;border-bottom:1px dashed var(--line);color:var(--cream-dim);font-size:.93rem;display:flex;justify-content:space-between;gap:14px}
+.cap li:last-child{border:none}
+.cap li em{font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--cream-faint);text-transform:uppercase;padding-top:4px;white-space:nowrap;text-align:right}
+.ethos{border-top:1px solid var(--line)}
+.ethos blockquote{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(1.9rem,5vw,4rem);line-height:1.16;letter-spacing:-.01em;max-width:24ch}
+.ethos blockquote em{color:var(--red)}
+.ethos .bn-line{font-family:var(--bn);color:var(--jade);font-size:clamp(1.05rem,2vw,1.35rem);margin-top:30px}
+.ethos .bn-line span{color:var(--cream-faint);font-family:var(--mono);font-size:.68em;letter-spacing:.14em;margin-left:16px;text-transform:uppercase}
+.contact{border-top:1px solid var(--line);min-height:84svh;display:flex;flex-direction:column;justify-content:center}
+.contact .eyebrow{margin-bottom:28px}
+.contact h2{font-weight:860;font-variation-settings:'wdth' 122;text-transform:uppercase;font-size:clamp(2.5rem,10vw,9rem);line-height:.9;letter-spacing:-.028em}
+.contact h2 em{font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none;font-size:.96em}
+.contact h2 a{position:relative;display:inline-block;transition:color .25s;color:var(--red)}
+.contact h2 a:hover{color:var(--cream)}
+.contact h2 a::after{content:'';position:absolute;left:0;bottom:.02em;width:100%;height:.05em;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.16,.8,.24,1)}
+.contact h2 a:hover::after{transform:scaleX(1)}
+.contact .links{display:flex;gap:clamp(18px,4vw,46px);margin-top:clamp(32px,5.5vh,60px);flex-wrap:wrap;font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+.contact .links a{color:var(--cream-dim);border-bottom:1px solid var(--line-strong);padding-bottom:5px;transition:color .2s,border-color .2s}
+.contact .links a:hover{color:var(--red);border-color:var(--red)}
+.footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:26px var(--gutter);border-top:1px solid var(--line);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-faint)}
+.footer .bn{font-family:var(--bn);text-transform:none;font-weight:500}
+.rv{opacity:0;transform:translateY(36px);transition:opacity .85s ease,transform .85s cubic-bezier(.16,.8,.24,1)}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}html{scroll-behavior:auto}.rv{opacity:1;transform:none}.hero h1 .row span{transform:none}}
+</style>
+</head>
+<body>
+<div id="sun" aria-hidden="true"></div>
+<header class="topbar">
+  <a class="brand" href="#top">JA<span class="bn">জো</span></a>
+  <nav><a href="#manifest">Manifest</a><a href="#service">Record</a><a href="#capabilities">Capabilities</a><a href="#contact">Contact</a></nav>
+  <span class="eyebrow" id="ctg-time">CTG —:—</span>
+</header>
+<main id="top">
+<section class="hero" aria-label="Introduction">
+  <div class="bn-echo" aria-hidden="true">জোবায়েদ<br>আহমেদ</div>
+  <div class="hero-meta">
+    <span>Chattogram, Bangladesh <span class="dot">●</span> 22.35°N&nbsp;91.78°E</span>
+    <span>DevOps · Cloud · Full-stack product</span>
+    <span>Open to select projects</span>
+  </div>
+  <h1><span class="row"><span>Jubayed</span></span><span class="row"><span>Ahmed<em>.</em></span></span></h1>
+  <div class="hero-foot">
+    <p><strong>One engineer. The whole stack.</strong> From the port city that moves ninety percent of a nation's trade — I keep production infrastructure alive on AWS, build the CI/CD pipelines that carry software to release, and ship complete products of my own, end to end, solo.</p>
+    <span class="scroll-cue">Scroll the manifest</span>
+  </div>
+</section>
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track" id="mq"><span>AWS ECS <i>·</i></span><span>Docker <i>·</i></span><span>GitHub Actions <i>·</i></span><span>GitLab CI/CD <i>·</i></span><span>CloudWatch <i>·</i></span><span>Secrets Manager <i>·</i></span><span>Linux <i>·</i></span><span>Nginx <i>·</i></span><span>ELK Stack <i>·</i></span><span>Grafana <i>·</i></span><span>Kotlin <i>·</i></span><span>Flutter <i>·</i></span><span>Laravel <i>·</i></span><span>PostgreSQL <i>·</i></span><span>Python <i>·</i></span></div>
+</div>
+
+<section class="manifest" id="manifest">
+  <div class="sec-head rv"><h2>The Manifest<span class="bn">তালিকা</span></h2><span class="eyebrow">Cargo log <b>/</b> Selected work <b>/</b> Click an entry to open the hold</span></div>
+
+  <article class="cargo rv" tabindex="0" role="button" aria-expanded="false">
+    <div class="no"><b>MNF-001</b><i>2025–26<br>DevOps · Enterprise</i></div>
+    <div><h3>Banking CI/CD Migration</h3>
+      <p class="brief">Consulting on a digital-banking client's migration from Azure DevOps to GitLab CI/CD — authoring pipelines, registering Windows Shell Runners across locked-down RDP jump-host chains, and automating IIS deployment for ASP.NET applications across four environments.</p>
+      <div class="hold"><div class="hold-inner">
+        <div><h4>The work</h4><ul>
+          <li>Pipeline authoring for build → test → deploy across Dev / QA / UAT / Prod</li>
+          <li>Runner installation on air-gapped internal servers via multi-hop RDP</li>
+          <li>Reverse-engineered the client's web.config transformation mechanism and documented the correct GitLab-equivalent approach</li>
+          <li>Solution annex documentation adopted by the client team</li>
+        </ul></div>
+        <div><h4>Stack</h4><div class="stack-chips"><span>GitLab CI/CD</span><span>PowerShell</span><span>IIS</span><span>ASP.NET</span><span>Windows Runners</span></div>
+        <p style="margin-top:16px">Regulated-industry constraints and zero-downtime expectations — DevOps where mistakes are expensive.</p></div>
+      </div></div>
+    </div>
+    <span class="status shipped">Shipped</span><span class="expand-cue">+ Open hold</span>
+  </article>
+
+  <article class="cargo rv" tabindex="0" role="button" aria-expanded="false">
+    <div class="no"><b>MNF-002</b><i>2026<br>Native Android</i></div>
+    <div><h3>MoneyMan<span class="bn">টাকা</span></h3>
+      <p class="brief">A personal finance app built to replace four years of daily dependence on a commercial app — migrating ~4,000 real transactions from a reverse-engineered SQLite backup into an offline-first, precision-safe ledger of my own design.</p>
+      <div class="hold"><div class="hold-inner">
+        <div><h4>Why it's hard</h4><ul>
+          <li>Reverse-engineered a proprietary .mmbak SQLite backup format for lossless migration</li>
+          <li>All money stored as integer paisa — zero floating-point drift across 4,000+ records</li>
+          <li>First-class debt &amp; savings tracking, not bolted-on categories</li>
+          <li>Timezone-correct throughout, a detail most finance apps get wrong</li>
+        </ul></div>
+        <div><h4>Stack &amp; roadmap</h4><div class="stack-chips"><span>Kotlin</span><span>Jetpack Compose</span><span>Room</span><span>SQLite</span><span>Material 3</span></div>
+        <p style="margin-top:16px">V2 charts a full product arc: widgets, full-text search, budgets, biometric lock, and Bengali localisation — a seven-phase build with agent-ready documentation.</p></div>
+      </div></div>
+    </div>
+    <span class="status transit">In transit</span><span class="expand-cue">+ Open hold</span>
+  </article>
+
+  <article class="cargo rv" tabindex="0" role="button" aria-expanded="false">
+    <div class="no"><b>MNF-003</b><i>2026<br>Mobile · EdTech</i></div>
+    <div><h3>Ta'allam<span class="bn">তাআল্লাম</span></h3>
+      <p class="brief">An offline-first Arabic learning app for Bengali-speaking learners — Duolingo-style progression with dual Conversational and Quranic tracks.</p>
+      <div class="hold"><div class="hold-inner">
+        <div><h4>The ambition</h4><ul>
+          <li>Dual-track curriculum: everyday Arabic and Quranic Arabic</li>
+          <li>Offline-first architecture for low-connectivity users across Bangladesh</li>
+          <li>AI-assisted content pipeline converting source PDFs into structured lessons</li>
+          <li>Public and in active development on GitHub</li>
+        </ul></div>
+        <div><h4>Stack</h4><div class="stack-chips"><span>Flutter</span><span>Riverpod</span><span>Supabase</span><span>Gemini API</span></div>
+        <p style="margin-top:16px">Every architectural choice targets zero marginal cost per learner — infrastructure engineered to scale before revenue does.</p></div>
+      </div></div>
+    </div>
+    <span class="status transit">In transit</span><span class="expand-cue">+ Open hold</span>
+  </article>
+
+  <article class="cargo rv" tabindex="0" role="button" aria-expanded="false">
+    <div class="no"><b>MNF-004</b><i>2025<br>Full-stack · Security</i></div>
+    <div><h3>Encrypted Digital Library</h3>
+      <p class="brief">A private digital library platform for a medical university — AES-256-GCM encrypted content delivery, in-browser PDF and EPUB reading, and role-based access control, containerised for on-premise deployment.</p>
+      <div class="hold"><div class="hold-inner">
+        <div><h4>Highlights</h4><ul>
+          <li>Content encrypted at rest; decrypted only for authorised readers</li>
+          <li>In-browser reading via PDF.js and epub.js — no downloads, no leakage</li>
+          <li>Role-based access for students, faculty, and librarians</li>
+          <li>Fully Dockerised for the university's own infrastructure</li>
+        </ul></div>
+        <div><h4>Stack</h4><div class="stack-chips"><span>Node.js</span><span>Express</span><span>React</span><span>PostgreSQL</span><span>Docker</span><span>AES-256-GCM</span></div></div>
+      </div></div>
+    </div>
+    <span class="status shipped">Shipped</span><span class="expand-cue">+ Open hold</span>
+  </article>
+
+  <article class="cargo rv" tabindex="0" role="button" aria-expanded="false">
+    <div class="no"><b>MNF-005</b><i>2025<br>PWA · Zero-cost infra</i></div>
+    <div><h3>Invoice &amp; Inventory PWA</h3>
+      <p class="brief">A complete invoicing and inventory system for an internet &amp; CCTV service company — running entirely in the browser with local-first storage, deployed serverless on GitHub Pages.</p>
+      <div class="hold"><div class="hold-inner">
+        <div><h4>The constraint as the feature</h4><ul>
+          <li>IndexedDB via Dexie.js — the client's data never leaves their device</li>
+          <li>Installable PWA: works offline, feels native</li>
+          <li>Static hosting means no server bills, no maintenance contract, no downtime</li>
+        </ul></div>
+        <div><h4>Stack</h4><div class="stack-chips"><span>Vite</span><span>React</span><span>Dexie.js</span><span>PWA</span><span>GitHub Pages</span></div></div>
+      </div></div>
+    </div>
+    <span class="status shipped">Shipped</span><span class="expand-cue">+ Open hold</span>
+  </article>
+
+  <article class="cargo rv" tabindex="0" role="button" aria-expanded="false">
+    <div class="no"><b>MNF-006</b><i>2026<br>Platform · Proptech</i></div>
+    <div><h3>Real Estate Platform</h3>
+      <p class="brief">A business management platform for a Bangladeshi real estate firm — admin panels, property and client workflows, and mapping, architected end-to-end on free-tier cloud infrastructure.</p>
+      <div class="hold"><div class="hold-inner">
+        <div><h4>Highlights</h4><ul>
+          <li>FilamentPHP admin architecture for rapid, robust back-office tooling</li>
+          <li>Infrastructure engineered to free tiers: Oracle Cloud compute, Cloudflare R2 storage, OpenStreetMap</li>
+          <li>Scoped, quoted, and architected solo — from requirements to delivery plan</li>
+        </ul></div>
+        <div><h4>Stack</h4><div class="stack-chips"><span>Laravel</span><span>FilamentPHP</span><span>Oracle Cloud</span><span>Cloudflare R2</span><span>OpenStreetMap</span></div></div>
+      </div></div>
+    </div>
+    <span class="status docked">Docked</span><span class="expand-cue">+ Open hold</span>
+  </article>
+
+  <article class="cargo rv" tabindex="0" role="button" aria-expanded="false">
+    <div class="no"><b>MNF-007</b><i>Ongoing<br>Automation</i></div>
+    <div><h3>Ops Automation Suite</h3>
+      <p class="brief">The unglamorous work that compounds: automated tenant billing for a 15-flat rental portfolio, and a real-time customer-support monitor that polls an authenticated API and pipes alerts straight to Telegram.</p>
+      <div class="hold"><div class="hold-inner">
+        <div><h4>Why it matters</h4><ul>
+          <li>Hours of monthly manual billing collapsed into a scheduled job</li>
+          <li>Support messages surfaced in seconds instead of on next login</li>
+          <li>Built with the cheapest tool that works — Apps Script, cron, webhooks</li>
+        </ul></div>
+        <div><h4>Stack</h4><div class="stack-chips"><span>Google Apps Script</span><span>Telegram Bot API</span><span>Webhooks</span></div></div>
+      </div></div>
+    </div>
+    <span class="status shipped">Shipped</span><span class="expand-cue">+ Open hold</span>
+  </article>
+</section>
+
+<section class="service" id="service">
+  <div class="sec-head rv"><h2>Service Record<span class="bn">কর্মজীবন</span></h2><span class="eyebrow">Professional experience <b>/</b> Production systems, real stakes</span></div>
+
+  <article class="post rv">
+    <div class="term"><b>May 2026 — Present</b>Remote</div>
+    <div><h3>Neosis-IT Solutions</h3><p class="role">DevOps Engineer · Full-time</p>
+      <ul>
+        <li>Currently serving as DevOps Engineer — infrastructure, CI/CD pipelines, and cloud operations, remotely</li>
+        <li>Applying production AWS, Docker, and monitoring experience to live environments</li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="post rv">
+    <div class="term"><b>Feb 2023 — Present</b>Bangladesh · Remote</div>
+    <div><h3>Digitgiants</h3><p class="role">Software Engineer · Full-time · 3 yrs 5 mos</p>
+      <ul>
+        <li>Full-stack engineering across <b>Python, FastAPI</b>, and adjacent domains in a remote-first team</li>
+        <li>Building and maintaining production web services and APIs</li>
+        <li>Held concurrently with independent product development and DevOps consulting</li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="post rv">
+    <div class="term"><b>Aug 2021 — Jan 2023</b>Germany · Remote</div>
+    <div><h3>Mulytic Labs GmbH</h3><p class="role">Technical Support Engineer · 1 yr 6 mos, incl. internship</p>
+      <ul>
+        <li>Maintained smart infrastructure remotely with <b>ELK Stack, Grafana, Prometheus, Kibana, Balena, Jira</b></li>
+        <li>Administered Linux production servers — hardening and optimisation at <b>99.9% uptime</b></li>
+        <li>Configured Nginx reverse proxies, SSL, and DNS across multiple production environments</li>
+        <li>AWS services and ELK monitoring — <b>40% faster data retrieval</b> and rapid log analysis</li>
+        <li>Converted from a 3-month internship (Aug–Oct 2021) to full-time on merit</li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="post rv">
+    <div class="term"><b>Nov 2019 — Apr 2020</b>Bangladesh</div>
+    <div><h3>Leadsoft Bangladesh Limited</h3><p class="role">Trainee · Game Developer · Apprenticeship</p>
+      <ul>
+        <li>First professional post — game development apprenticeship, the origin of an engineering practice</li>
+        <li>Followed by a run of independent Unity prototypes that sharpened the instinct to finish and ship</li>
+      </ul>
+    </div>
+  </article>
+
+  <div class="creds rv">
+    <div class="cred"><h5>Education</h5><p><b>B.Sc. in Computer Science &amp; Engineering</b>International Islamic University Chittagong · 2013–2018</p></div>
+    <div class="cred"><h5>Thesis</h5><p><b>Noisy Health Data Integration with Privacy Preservation</b>Supervised by Dr. Shahidul Islam Khan</p></div>
+    <div class="cred"><h5>Publication</h5><p><b>Hybrid Feature Selection Algorithm to Support Health Data Warehousing</b>ICICCT 2019 · Istanbul, Turkey · co-author</p></div>
+    <div class="cred"><h5>Languages</h5><p><b>Bengali <span class="bn-mark">বাংলা</span> · English</b>Native · Professional working proficiency</p></div>
+  </div>
+</section>
+
+<section id="capabilities">
+  <div class="sec-head rv"><h2>Capabilities<span class="bn">দক্ষতা</span></h2><span class="eyebrow">Three departments <b>/</b> One engineer</span></div>
+  <div class="caps-grid rv">
+    <div class="cap"><span class="bn-big" aria-hidden="true">যন্ত্র</span><h3>DevOps &amp; Cloud</h3>
+      <ul><li>AWS in production <em>ECS · ECR · EC2 · IAM</em></li><li>CI/CD pipeline design <em>GitHub Actions · GitLab · Azure</em></li><li>Containers <em>Docker · Compose</em></li><li>Monitoring &amp; observability <em>CloudWatch · ELK · Grafana</em></li><li>Linux server administration <em>Nginx · SSL · Hardening</em></li><li>IaC &amp; orchestration <em>Terraform · Kubernetes</em></li></ul>
+    </div>
+    <div class="cap"><span class="bn-big" aria-hidden="true">পণ্য</span><h3>Product Engineering</h3>
+      <ul><li>Native Android <em>Kotlin · Compose</em></li><li>Cross-platform mobile <em>Flutter · Riverpod</em></li><li>Full-stack web <em>Laravel · React · Node · .NET</em></li><li>Offline-first architecture <em>Room · Dexie · SQLite</em></li><li>Databases <em>PostgreSQL · MySQL · Elasticsearch</em></li></ul>
+    </div>
+    <div class="cap"><span class="bn-big" aria-hidden="true">বুদ্ধি</span><h3>AI-Native Workflow</h3>
+      <ul><li>Agent-ready documentation <em>Context files · Build plans</em></li><li>LLM content pipelines <em>Gemini · LangChain</em></li><li>Applied NLP research <em>BERT · Published author</em></li><li>Automation glue <em>Apps Script · Bots · Webhooks</em></li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="ethos">
+  <blockquote class="rv">Great software doesn't need a big team — it needs <em>one person</em> who refuses to ship anything less.</blockquote>
+  <p class="bn-line rv">চট্টগ্রামে তৈরি, বিশ্বজুড়ে পৌঁছে <span>Built in Chattogram · Delivered worldwide</span></p>
+</section>
+
+<section class="contact" id="contact">
+  <div class="rv">
+    <p class="eyebrow">Have cargo worth shipping? <b>●</b> Open to select projects</p>
+    <h2>Let's build<br><em><a href="mailto:jubayedsr@gmail.com">something rare.</a></em></h2>
+    <div class="links">
+      <a href="mailto:jubayedsr@gmail.com">jubayedsr@gmail.com ↗</a>
+      <a href="https://www.linkedin.com/in/jashuvo/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="https://github.com/Jashuvo" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="tel:+8801401223871">+880 1401-223871 ↗</a>
+      <a href="../Jubayed_Ahmed_Resume.pdf" download="Jubayed_Ahmed_Resume.pdf">Resume ↓</a>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="footer">
+  <span>© 2026 Jubayed Ahmed · জোবায়েদ আহমেদ</span>
+  <span>Designed &amp; built solo — no template, no team</span>
+  <span>Chattogram · 22.35°N 91.78°E</span>
+</footer>
+<script>
+const sun = document.getElementById('sun');
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(!reduced){
+  let ticking = false;
+  const moveSun = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const p = max > 0 ? scrollY / max : 0;
+    const x = Math.sin(p * Math.PI) * -55;
+    const y = p < .82 ? p * 112 : 112 - (p - .82) * 300;
+    const s = 1 - Math.sin(p * Math.PI) * .48;
+    sun.style.transform = `translate(${x}vw, ${y}vh) scale(${s})`;
+    ticking = false;
+  };
+  addEventListener('scroll', () => { if(!ticking){ requestAnimationFrame(moveSun); ticking = true; } }, {passive:true});
+  moveSun();
+}
+const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold:.12});
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+document.querySelectorAll('.cargo').forEach(c => {
+  const toggle = () => {
+    const open = c.classList.toggle('open');
+    c.setAttribute('aria-expanded', open);
+    c.querySelector('.expand-cue').textContent = open ? '− Close hold' : '+ Open hold';
+  };
+  c.addEventListener('click', e => { if (e.target.tagName !== 'A') toggle(); });
+  c.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+});
+const mq = document.getElementById('mq');
+mq.innerHTML += mq.innerHTML;
+const tick = () => {
+  const t = new Date().toLocaleTimeString('en-GB',{timeZone:'Asia/Dhaka',hour:'2-digit',minute:'2-digit'});
+  const el = document.getElementById('ctg-time');
+  if (el) el.textContent = 'CTG ' + t;
+};
+tick(); setInterval(tick, 30000);
+</script>
+</body>
+</html>
