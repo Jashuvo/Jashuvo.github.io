@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jubayed Ahmed — DevOps & Full-Stack Engineer</title>
+<meta name="description" content="DevOps & full-stack engineer based in Chattogram, Bangladesh. AWS, CI/CD, containers — and complete products shipped solo.">
+<meta property="og:title" content="Jubayed Ahmed — DevOps & Full-Stack Engineer">
+<meta property="og:description" content="One engineer, the whole stack. Based in Chattogram, Bangladesh.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400&family=JetBrains+Mono:wght@300;400;500;600&family=Anek+Bangla:wght@400..700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0e12;
+  --card:#15161c;
+  --card-2:#1b1c24;
+  --border:rgba(235,236,240,.09);
+  --border-hi:rgba(235,236,240,.2);
+  --txt:#ecedf1;
+  --txt-2:rgba(236,237,241,.62);
+  --txt-3:rgba(236,237,241,.38);
+  --accent:#ff5148;
+  --accent-soft:rgba(255,81,72,.14);
+  --green:#4ade80;
+  --green-soft:rgba(74,222,128,.14);
+  --code-key:#8ab4ff;
+  --code-str:#9ee493;
+  --code-com:rgba(236,237,241,.35);
+  --shadow:0 18px 50px rgba(0,0,0,.4);
+  --sans:'Schibsted Grotesk',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+  --bn:'Anek Bangla',sans-serif;
+  --r:22px;
+}
+html[data-theme="light"]{
+  --bg:#f2f1ed;
+  --card:#ffffff;
+  --card-2:#f7f6f2;
+  --border:rgba(20,21,26,.09);
+  --border-hi:rgba(20,21,26,.22);
+  --txt:#17181d;
+  --txt-2:rgba(23,24,29,.64);
+  --txt-3:rgba(23,24,29,.4);
+  --accent:#e63e35;
+  --accent-soft:rgba(230,62,53,.1);
+  --green:#16a34a;
+  --green-soft:rgba(22,163,74,.12);
+  --code-key:#2f6fdb;
+  --code-str:#278a3f;
+  --code-com:rgba(23,24,29,.4);
+  --shadow:0 18px 44px rgba(20,21,26,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--txt);
+  font-family:var(--sans);font-weight:400;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  transition:background .35s ease,color .35s ease;
+  overflow-x:hidden;
+}
+::selection{background:var(--accent);color:#fff}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible,[role=button]:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(16px,3vw,32px)}
+
+/* ---------- top row ---------- */
+.top{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:22px 0 26px;font-family:var(--mono);font-size:12px;color:var(--txt-2);
+}
+.top .clock b{color:var(--txt);font-weight:500}
+.theme-btn{
+  font-family:var(--mono);font-size:12px;color:var(--txt-2);
+  background:var(--card);border:1px solid var(--border);border-radius:100px;
+  padding:8px 16px;cursor:pointer;display:flex;align-items:center;gap:8px;
+  transition:border-color .2s,color .2s;
+}
+.theme-btn:hover{border-color:var(--border-hi);color:var(--txt)}
+.theme-btn .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+
+/* ---------- bento grid ---------- */
+.bento{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+  grid-auto-flow:dense;
+}
+.card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:clamp(20px,2.4vw,28px);position:relative;overflow:hidden;
+  transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease,background .35s ease;
+  opacity:0;transform:translateY(22px);
+}
+.card.in{opacity:1;transform:translateY(0)}
+.card:hover{transform:translateY(-3px);border-color:var(--border-hi);box-shadow:var(--shadow)}
+.card h4{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--txt-3);font-weight:500;margin-bottom:14px;
+}
+.s2{grid-column:span 2}
+.s4{grid-column:span 4}
+.r2{grid-row:span 2}
+@media(max-width:900px){
+  .bento{grid-template-columns:repeat(2,1fr)}
+  .s4{grid-column:span 2}
+}
+@media(max-width:560px){
+  .bento{grid-template-columns:1fr}
+  .s2,.s4{grid-column:span 1}
+}
+
+/* ---------- intro card ---------- */
+.c-intro .ava{
+  width:64px;height:64px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),#ff8d5c);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--bn);font-weight:700;font-size:30px;color:#fff;
+  margin-bottom:18px;
+}
+.c-intro h1{
+  font-size:clamp(1.5rem,2.6vw,2rem);font-weight:700;letter-spacing:-.02em;line-height:1.2;
+}
+.c-intro h1 .wave{display:inline-block;animation:wave 2.4s ease-in-out infinite;transform-origin:70% 70%}
+@keyframes wave{0%,60%,100%{transform:rotate(0)}65%,80%{transform:rotate(16deg)}72%,88%{transform:rotate(-8deg)}}
+.c-intro .bn-name{font-family:var(--bn);font-weight:500;color:var(--txt-2);font-size:1.05rem;margin-top:4px}
+.c-intro p.sub{color:var(--txt-2);margin-top:14px;font-size:.98rem;max-width:40ch}
+.c-intro p.sub b{color:var(--txt);font-weight:600}
+.c-intro .pill-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.pill{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;
+  border:1px solid var(--border);border-radius:100px;padding:6px 13px;color:var(--txt-2);
+}
+.pill.hot{color:var(--green);border-color:transparent;background:var(--green-soft)}
+.pill.hot::before{content:'● ';font-size:.8em}
+
+/* ---------- code card ---------- */
+.c-code{background:var(--card-2)}
+.c-code .win{display:flex;gap:6px;margin-bottom:16px}
+.c-code .win i{width:10px;height:10px;border-radius:50%;background:var(--border-hi);display:block}
+.c-code .win i:first-child{background:var(--accent)}
+.c-code pre{
+  font-family:var(--mono);font-size:clamp(10.5px,1.15vw,12.5px);line-height:1.85;
+  color:var(--txt-2);overflow-x:auto;white-space:pre;
+}
+.c-code .k{color:var(--code-key)}
+.c-code .s{color:var(--code-str)}
+.c-code .c{color:var(--code-com);font-style:italic}
+.c-code .a{color:var(--accent)}
+.c-code .cursor{display:inline-block;width:7px;height:1em;background:var(--accent);vertical-align:text-bottom;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* ---------- marquee card ---------- */
+.c-marquee{padding:0;display:flex;flex-direction:column;justify-content:center;gap:10px;min-height:96px}
+.mq{overflow:hidden;display:flex}
+.mq-track{display:flex;gap:10px;width:max-content;padding:0 5px;animation:mqL 38s linear infinite}
+.mq.rev .mq-track{animation:mqR 42s linear infinite}
+@keyframes mqL{to{transform:translateX(-50%)}}
+@keyframes mqR{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.mq .tag{
+  font-family:var(--mono);font-size:11.5px;white-space:nowrap;
+  border:1px solid var(--border);border-radius:100px;padding:8px 16px;color:var(--txt-2);
+  background:var(--card-2);
+}
+.mq .tag i{font-style:normal;color:var(--accent);margin-right:8px}
+
+/* ---------- experience card (tabs) ---------- */
+.c-exp .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.c-exp .tab{
+  font-family:var(--mono);font-size:11px;padding:7px 14px;border-radius:100px;cursor:pointer;
+  border:1px solid var(--border);color:var(--txt-2);background:transparent;
+  transition:all .2s;
+}
+.c-exp .tab.on{background:var(--txt);color:var(--bg);border-color:var(--txt)}
+.c-exp .rows{display:none}
+.c-exp .rows.on{display:block}
+.c-exp .row{
+  display:flex;justify-content:space-between;align-items:baseline;gap:14px;
+  padding:13px 0;border-bottom:1px solid var(--border);
+}
+.c-exp .row:last-child{border:none;padding-bottom:0}
+.c-exp .row .l b{font-weight:600;font-size:.98rem;display:block}
+.c-exp .row .l span{color:var(--txt-2);font-size:.85rem}
+.c-exp .row .r{font-family:var(--mono);font-size:10.5px;color:var(--txt-3);white-space:nowrap;text-align:right}
+.c-exp .row .r.now{color:var(--green)}
+
+/* ---------- location card ---------- */
+.c-loc{display:flex;flex-direction:column;justify-content:space-between;min-height:170px;
+  background:
+   radial-gradient(circle at 78% 22%, var(--accent-soft), transparent 55%),
+   var(--card);
+}
+.c-loc .flag{font-size:30px}
+.c-loc .where b{display:block;font-weight:600;font-size:1.02rem;margin-top:10px}
+.c-loc .where span{color:var(--txt-2);font-size:.86rem}
+.c-loc .cha{color:var(--txt-2);font-size:.86rem;margin-top:12px}
+.c-loc .coords{font-family:var(--mono);font-size:9.5px;color:var(--txt-3);margin-top:10px;letter-spacing:.08em}
+
+/* ---------- stats card ---------- */
+.c-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:14px}
+.c-stats .tile{
+  background:var(--card-2);border:1px solid var(--border);border-radius:14px;
+  padding:16px 16px 14px;
+}
+.c-stats .tile .k{font-weight:800;font-size:clamp(1.3rem,2vw,1.7rem);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.c-stats .tile .k i{font-style:normal;color:var(--accent)}
+.c-stats .tile .d{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--txt-3);margin-top:5px}
+
+/* ---------- values card ---------- */
+.c-values{display:flex;flex-direction:column;justify-content:center;gap:2px}
+.c-values .v{
+  font-weight:800;font-size:clamp(1.4rem,2.4vw,1.9rem);letter-spacing:-.02em;line-height:1.35;
+  color:var(--txt-3);transition:color .25s,padding-left .25s;cursor:default;
+}
+.c-values .v:hover{color:var(--txt);padding-left:8px}
+.c-values .v i{font-style:normal;color:var(--accent);font-family:var(--mono);font-size:.5em;vertical-align:.5em;margin-right:10px}
+
+/* ---------- link cards ---------- */
+.c-link{
+  display:flex;flex-direction:column;justify-content:space-between;min-height:140px;cursor:pointer;
+}
+.c-link .ic{font-size:22px}
+.c-link .lb{font-weight:600;font-size:1rem;display:flex;align-items:center;gap:8px}
+.c-link .lb::after{content:'↗';color:var(--accent);transition:transform .25s}
+.c-link:hover .lb::after{transform:translate(3px,-3px)}
+.c-link .sub{font-family:var(--mono);font-size:10px;color:var(--txt-3);margin-top:4px}
+
+/* ---------- contact card ---------- */
+.c-contact{
+  background:linear-gradient(120deg,var(--accent),#ff7a52);
+  color:#fff;min-height:150px;border:none;cursor:pointer;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.c-contact h4{color:rgba(255,255,255,.7)}
+.c-contact .big{font-weight:800;font-size:clamp(1.5rem,2.8vw,2.1rem);letter-spacing:-.02em;line-height:1.15}
+.c-contact .mail{font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.85);margin-top:14px;display:flex;align-items:center;gap:10px}
+.c-contact .mail .cp{
+  border:1px solid rgba(255,255,255,.4);border-radius:100px;padding:4px 12px;font-size:10px;
+  transition:background .2s;
+}
+.c-contact:hover .cp{background:rgba(255,255,255,.15)}
+.c-contact.s4{
+  flex-direction:row;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+}
+.c-contact.s4 h4{position:absolute;top:clamp(20px,2.4vw,28px);left:clamp(20px,2.4vw,28px)}
+.c-contact.s4 > div:last-child{
+  display:flex;align-items:center;gap:clamp(20px,4vw,48px);flex-wrap:wrap;width:100%;
+  justify-content:space-between;
+}
+.c-contact.s4 .mail{margin-top:0}
+@media(max-width:700px){
+  .c-contact.s4{flex-direction:column;align-items:flex-start}
+  .c-contact.s4 h4{position:static;margin-bottom:6px}
+  .c-contact.s4 > div:last-child{flex-direction:column;align-items:flex-start;gap:14px}
+}
+
+/* ---------- work section ---------- */
+.work-head{
+  display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;
+  margin:clamp(40px,7vh,64px) 0 18px;
+}
+.work-head h2{font-weight:800;font-size:clamp(1.5rem,3vw,2.1rem);letter-spacing:-.025em}
+.work-head h2 .bn{font-family:var(--bn);font-weight:500;font-size:.62em;color:var(--txt-2);margin-left:10px}
+.work-head .cnt{font-family:var(--mono);font-size:11px;color:var(--txt-3)}
+.work-head .cnt b{color:var(--green);font-weight:500}
+.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(max-width:760px){.projects{grid-template-columns:1fr}}
+.proj{cursor:pointer}
+.proj .top-row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.proj .meta{font-family:var(--mono);font-size:10px;color:var(--txt-3);letter-spacing:.08em}
+.status{
+  font-family:var(--mono);font-size:10px;letter-spacing:.08em;border-radius:100px;padding:5px 12px;white-space:nowrap;
+}
+.status.ship{color:var(--green);background:var(--green-soft)}
+.status.ship::before{content:'✓ '}
+.status.build{color:var(--accent);background:var(--accent-soft)}
+.status.build::before{content:'● ';animation:blink 1.3s steps(1) infinite}
+.status.plan{color:var(--txt-3);background:var(--card-2)}
+.proj h3{font-weight:700;font-size:clamp(1.15rem,2vw,1.45rem);letter-spacing:-.02em;margin-top:12px}
+.proj h3 .bn{font-family:var(--bn);font-weight:500;font-size:.68em;color:var(--txt-2);margin-left:8px}
+.proj p.d{color:var(--txt-2);font-size:.92rem;margin-top:8px}
+.proj .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.proj .tags span{font-family:var(--mono);font-size:10px;border:1px solid var(--border);border-radius:100px;padding:4px 11px;color:var(--txt-2)}
+.proj .more{max-height:0;overflow:hidden;opacity:0;transition:max-height .5s cubic-bezier(.16,.8,.24,1),opacity .35s}
+.proj.open .more{max-height:420px;opacity:1}
+.proj .more ul{list-style:none;margin-top:16px;border-top:1px solid var(--border);padding-top:14px}
+.proj .more li{
+  padding:5px 0 5px 20px;position:relative;color:var(--txt-2);font-size:.88rem;
+}
+.proj .more li::before{content:'→';position:absolute;left:0;color:var(--accent);font-size:.8em;top:7px}
+.proj .cue{font-family:var(--mono);font-size:9.5px;color:var(--txt-3);margin-top:14px;letter-spacing:.1em;text-transform:uppercase;transition:color .2s}
+.proj:hover .cue{color:var(--accent)}
+
+/* ---------- footer ---------- */
+.footer{
+  display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+  padding:clamp(36px,6vh,56px) 0 30px;
+}
+.footer .socials{display:flex;gap:18px;font-size:.92rem;font-weight:500}
+.footer .socials a{color:var(--txt-2);transition:color .2s}
+.footer .socials a:hover{color:var(--accent)}
+.footer .cr{font-family:var(--mono);font-size:10.5px;color:var(--txt-3)}
+.footer .cr .bn{font-family:var(--bn)}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .card{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- top row -->
+  <div class="top">
+    <span class="clock" id="clock"><b>--:--</b> · Chattogram</span>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle theme"><span class="dot"></span><span id="themeLbl">Dark</span></button>
+  </div>
+
+  <!-- ============ BENTO ============ -->
+  <div class="bento">
+
+    <!-- intro -->
+    <div class="card c-intro s2 r2">
+      <div class="ava" aria-hidden="true">জ</div>
+      <h1>Hello, it's Jubayed <span class="wave">👋</span></h1>
+      <p class="bn-name">জোবায়েদ আহমেদ</p>
+      <p class="sub"><b>DevOps &amp; full-stack engineer.</b> I keep production systems alive on AWS by day and ship complete products — Android, Flutter, web — end to end, solo.</p>
+      <div class="pill-row">
+        <span class="pill hot">Open to select projects</span>
+        <span class="pill">Remote-friendly</span>
+        <span class="pill">UTC+6</span>
+      </div>
+    </div>
+
+    <!-- code -->
+    <div class="card c-code s2 r2">
+      <div class="win" aria-hidden="true"><i></i><i></i><i></i></div>
+<pre><span class="c"># .gitlab-ci.yml — profile</span>
+<span class="k">engineer</span>: <span class="s">"Jubayed Ahmed"</span>
+<span class="k">base</span>: <span class="s">"Chattogram, BD 🇧🇩"</span>
+
+<span class="k">stages</span>:
+  - <span class="s">build</span>      <span class="c"># products, solo</span>
+  - <span class="s">deploy</span>     <span class="c"># aws · docker · ci/cd</span>
+  - <span class="s">monitor</span>    <span class="c"># elk · grafana · cw</span>
+
+<span class="k">variables</span>:
+  <span class="k">UPTIME</span>: <span class="a">"99.9%"</span>
+  <span class="k">TEAM_SIZE</span>: <span class="a">1</span>
+  <span class="k">EXCUSES</span>: <span class="a">0</span>
+
+<span class="k">artifacts</span>:
+  <span class="k">paths</span>: [<span class="s">shipped/**</span>]<span class="cursor"></span></pre>
+    </div>
+
+    <!-- marquee -->
+    <div class="card c-marquee s4">
+      <div class="mq"><div class="mq-track" id="mq1"></div></div>
+      <div class="mq rev"><div class="mq-track" id="mq2"></div></div>
+    </div>
+
+    <!-- experience tabs -->
+    <div class="card c-exp s2 r2">
+      <h4>Track record</h4>
+      <div class="tabs" role="tablist">
+        <button class="tab on" data-t="exp" role="tab">Experience</button>
+        <button class="tab" data-t="edu" role="tab">Education</button>
+        <button class="tab" data-t="pub" role="tab">Research</button>
+      </div>
+      <div class="rows on" data-p="exp">
+        <div class="row"><div class="l"><b>Neosis-IT Solutions</b><span>DevOps Engineer</span></div><div class="r now">May 2026 — Now</div></div>
+        <div class="row"><div class="l"><b>Digitgiants</b><span>Software Engineer · Python, FastAPI</span></div><div class="r now">Feb 2023 — Now</div></div>
+        <div class="row"><div class="l"><b>Mulytic Labs GmbH</b><span>Technical Support Engineer · 🇩🇪 remote</span></div><div class="r">Aug 2021 — Jan 2023</div></div>
+        <div class="row"><div class="l"><b>Leadsoft Bangladesh</b><span>Trainee · Game Developer</span></div><div class="r">Nov 2019 — Apr 2020</div></div>
+      </div>
+      <div class="rows" data-p="edu">
+        <div class="row"><div class="l"><b>B.Sc. Computer Science &amp; Engineering</b><span>International Islamic University Chittagong</span></div><div class="r">2013 — 2018</div></div>
+        <div class="row"><div class="l"><b>Thesis</b><span>Noisy Health Data Integration with Privacy Preservation</span></div><div class="r">Dr. S. I. Khan</div></div>
+      </div>
+      <div class="rows" data-p="pub">
+        <div class="row"><div class="l"><b>Hybrid Feature Selection Algorithm to Support Health Data Warehousing</b><span>Co-author · ICICCT 2019 · Istanbul, Turkey 🇹🇷</span></div><div class="r">2019</div></div>
+        <div class="row"><div class="l"><b>Applied NLP</b><span>BERT-based NER · LangChain pipelines</span></div><div class="r">2023</div></div>
+      </div>
+    </div>
+
+    <!-- location -->
+    <div class="card c-loc">
+      <span class="flag" aria-hidden="true">🇧🇩</span>
+      <div>
+        <div class="where"><b>Based in Chattogram</b><span>Bangladesh — the port city</span></div>
+        <p class="cha">If you're ever around, let's grab a cha ☕</p>
+        <p class="coords">22.3569° N · 91.7832° E</p>
+      </div>
+    </div>
+
+    <!-- resume download -->
+    <a class="card c-link c-resume" href="Jubayed_Ahmed_Resume.pdf" download="Jubayed_Ahmed_Resume.pdf">
+      <span class="ic" aria-hidden="true">⇩</span>
+      <div><div class="lb">Resume</div><div class="sub">Jubayed_Ahmed_Resume.pdf · 1 page</div></div>
+    </a>
+
+    <!-- stats -->
+    <div class="card c-stats s2">
+      <div class="tile"><div class="k"><i>+</i>30%</div><div class="d">Deploy frequency</div></div>
+      <div class="tile"><div class="k">99.9%</div><div class="d">Uptime held</div></div>
+      <div class="tile"><div class="k"><i>+</i>40%</div><div class="d">ELK retrieval</div></div>
+      <div class="tile"><div class="k">6<i>+ yrs</i></div><div class="d">In production systems</div></div>
+    </div>
+
+    <!-- values -->
+    <div class="card c-values s2">
+      <h4>Operating principles</h4>
+      <div class="v"><i>01</i>Totality</div>
+      <div class="v"><i>02</i>Precision</div>
+      <div class="v"><i>03</i>Frugality</div>
+      <div class="v"><i>04</i>Craft</div>
+    </div>
+
+    <!-- github -->
+    <a class="card c-link" href="https://github.com/Jashuvo" target="_blank" rel="noopener">
+      <span class="ic" aria-hidden="true">⌥</span>
+      <div><div class="lb">GitHub</div><div class="sub">github.com/Jashuvo · 31 repos</div></div>
+    </a>
+
+    <!-- linkedin -->
+    <a class="card c-link" href="https://www.linkedin.com/in/jashuvo/" target="_blank" rel="noopener">
+      <span class="ic" aria-hidden="true">in</span>
+      <div><div class="lb">LinkedIn</div><div class="sub">linkedin.com/in/jashuvo</div></div>
+    </a>
+
+    <!-- contact -->
+    <div class="card c-contact s4" id="mailCard" role="button" tabindex="0" aria-label="Copy email address">
+      <h4>Get in touch</h4>
+      <div>
+        <div class="big">Have something worth building?</div>
+        <div class="mail"><span>jubayedsr@gmail.com</span><span class="cp" id="cpLbl">copy</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ SELECTED WORK ============ -->
+  <div class="work-head">
+    <h2>Selected work<span class="bn">নির্বাচিত কাজ</span></h2>
+    <span class="cnt">7 projects · <b>2 in active build</b> · tap to expand</span>
+  </div>
+
+  <div class="projects">
+
+    <div class="card proj" tabindex="0" role="button" aria-expanded="false">
+      <div class="top-row"><span class="meta">2025–26 · ENTERPRISE DEVOPS</span><span class="status ship">shipped</span></div>
+      <h3>Banking CI/CD Migration</h3>
+      <p class="d">Azure DevOps → GitLab CI/CD for a digital-banking client: pipelines, Windows runners over RDP jump-hosts, automated IIS deployment across four environments.</p>
+      <div class="tags"><span>GitLab CI</span><span>PowerShell</span><span>IIS</span><span>ASP.NET</span></div>
+      <div class="more"><ul>
+        <li>Build → test → deploy across Dev / QA / UAT / Prod</li>
+        <li>Runners installed on air-gapped servers via multi-hop RDP</li>
+        <li>web.config transformation reverse-engineered &amp; re-documented for GitLab</li>
+        <li>Solution annex adopted by the client team</li>
+      </ul></div>
+      <div class="cue">+ details</div>
+    </div>
+
+    <div class="card proj" tabindex="0" role="button" aria-expanded="false">
+      <div class="top-row"><span class="meta">2026 · FINTECH · NATIVE ANDROID</span><span class="status build">building</span></div>
+      <h3>MoneyMan<span class="bn">টাকা</span></h3>
+      <p class="d">A personal finance app replacing four years of a commercial daily driver — ~4,000 real transactions migrated from a reverse-engineered SQLite backup into an offline-first ledger.</p>
+      <div class="tags"><span>Kotlin</span><span>Jetpack Compose</span><span>Room</span><span>Material 3</span></div>
+      <div class="more"><ul>
+        <li>Proprietary .mmbak backup format reverse-engineered for lossless migration</li>
+        <li>Money stored as integer paisa — zero floating-point drift</li>
+        <li>First-class debt &amp; savings tracking; timezone-correct throughout</li>
+        <li>V2: widgets, FTS search, budgets, biometric lock, Bengali localisation</li>
+      </ul></div>
+      <div class="cue">+ details</div>
+    </div>
+
+    <div class="card proj" tabindex="0" role="button" aria-expanded="false">
+      <div class="top-row"><span class="meta">2026 · EDTECH · MOBILE</span><span class="status build">building</span></div>
+      <h3>Ta'allam<span class="bn">তাআল্লাম</span></h3>
+      <p class="d">An offline-first Arabic learning app for Bengali-speaking learners — Duolingo-style progression with dual Conversational and Quranic tracks.</p>
+      <div class="tags"><span>Flutter</span><span>Riverpod</span><span>Supabase</span><span>Gemini API</span></div>
+      <div class="more"><ul>
+        <li>Dual-track curriculum: everyday Arabic and Quranic Arabic</li>
+        <li>Offline-first for low-connectivity users across Bangladesh</li>
+        <li>AI content pipeline: source PDFs → structured lessons</li>
+        <li>Public and in active development on GitHub</li>
+      </ul></div>
+      <div class="cue">+ details</div>
+    </div>
+
+    <div class="card proj" tabindex="0" role="button" aria-expanded="false">
+      <div class="top-row"><span class="meta">2025 · SECURITY · FULL-STACK</span><span class="status ship">shipped</span></div>
+      <h3>Encrypted Digital Library</h3>
+      <p class="d">A private library platform for a medical university — AES-256-GCM encrypted delivery, in-browser PDF/EPUB reading, role-based access, Dockerised on-premise.</p>
+      <div class="tags"><span>Node.js</span><span>React</span><span>PostgreSQL</span><span>Docker</span></div>
+      <div class="more"><ul>
+        <li>Content encrypted at rest; decrypted only for authorised readers</li>
+        <li>PDF.js / epub.js reading — no downloads, no leakage</li>
+        <li>Roles for students, faculty, and librarians</li>
+      </ul></div>
+      <div class="cue">+ details</div>
+    </div>
+
+    <div class="card proj" tabindex="0" role="button" aria-expanded="false">
+      <div class="top-row"><span class="meta">2025 · PWA · ZERO-COST INFRA</span><span class="status ship">shipped</span></div>
+      <h3>Invoice &amp; Inventory PWA</h3>
+      <p class="d">Complete invoicing + inventory for an internet &amp; CCTV company — local-first in the browser, deployed serverless on GitHub Pages.</p>
+      <div class="tags"><span>Vite</span><span>React</span><span>Dexie.js</span><span>PWA</span></div>
+      <div class="more"><ul>
+        <li>IndexedDB via Dexie — the client's data never leaves their device</li>
+        <li>Installable, offline-capable, native feel</li>
+        <li>No server bills, no maintenance contract, no downtime</li>
+      </ul></div>
+      <div class="cue">+ details</div>
+    </div>
+
+    <div class="card proj" tabindex="0" role="button" aria-expanded="false">
+      <div class="top-row"><span class="meta">2026 · PROPTECH · PLATFORM</span><span class="status plan">staged</span></div>
+      <h3>Real Estate Platform</h3>
+      <p class="d">Business management platform for a Bangladeshi real estate firm — admin panels, property &amp; client workflows, mapping — architected on free-tier cloud.</p>
+      <div class="tags"><span>Laravel</span><span>FilamentPHP</span><span>Oracle Cloud</span><span>Cloudflare R2</span></div>
+      <div class="more"><ul>
+        <li>FilamentPHP admin architecture for fast, robust back-office tooling</li>
+        <li>Free-tier engineering: Oracle Cloud + R2 + OpenStreetMap</li>
+        <li>Scoped, quoted, and architected solo</li>
+      </ul></div>
+      <div class="cue">+ details</div>
+    </div>
+
+    <div class="card proj" tabindex="0" role="button" aria-expanded="false">
+      <div class="top-row"><span class="meta">ONGOING · AUTOMATION</span><span class="status ship">shipped</span></div>
+      <h3>Ops Automation Suite</h3>
+      <p class="d">The unglamorous work that compounds: automated tenant billing for 15 rental flats, and a support monitor piping alerts from an authenticated API to Telegram.</p>
+      <div class="tags"><span>Apps Script</span><span>Telegram Bot</span><span>Webhooks</span></div>
+      <div class="more"><ul>
+        <li>Monthly manual billing collapsed into a scheduled job</li>
+        <li>Support messages surfaced in seconds, not next-login</li>
+        <li>Built with the cheapest tool that works</li>
+      </ul></div>
+      <div class="cue">+ details</div>
+    </div>
+
+    <div class="card proj c-values" style="cursor:default" tabindex="-1">
+      <h4>The through-line</h4>
+      <p style="font-weight:700;font-size:clamp(1.15rem,2vw,1.5rem);letter-spacing:-.02em;line-height:1.35">Requirements → architecture → deployment → monitoring. <span style="color:var(--accent)">No handoffs, no translation loss.</span></p>
+      <p style="color:var(--txt-2);font-size:.9rem;margin-top:12px;font-family:var(--bn)">চট্টগ্রামে তৈরি, বিশ্বজুড়ে পৌঁছে</p>
+    </div>
+
+  </div>
+
+  <!-- footer -->
+  <div class="footer">
+    <div class="socials">
+      <a href="mailto:jubayedsr@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/jashuvo/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/Jashuvo" target="_blank" rel="noopener">GitHub</a>
+      <a href="tel:+8801401223871">Phone</a>
+    </div>
+    <span class="cr">© 2026 Jubayed Ahmed · <span class="bn">জোবায়েদ আহমেদ</span> · Built solo, no template</span>
+  </div>
+
+</div>
+
+<script>
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- theme toggle (in-memory) ---------- */
+const btn = document.getElementById('themeBtn');
+const lbl = document.getElementById('themeLbl');
+btn.addEventListener('click', () => {
+  const html = document.documentElement;
+  const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+  html.dataset.theme = next;
+  lbl.textContent = next === 'dark' ? 'Dark' : 'Light';
+});
+
+/* ---------- live Chattogram clock ---------- */
+const clock = document.getElementById('clock');
+const tick = () => {
+  const now = new Date();
+  const t = now.toLocaleTimeString('en-GB',{timeZone:'Asia/Dhaka',hour:'2-digit',minute:'2-digit'});
+  const d = now.toLocaleDateString('en-GB',{timeZone:'Asia/Dhaka',day:'numeric',month:'short',year:'numeric'});
+  clock.innerHTML = `<b>${t}</b> · ${d} · Chattogram`;
+};
+tick(); setInterval(tick, 15000);
+
+/* ---------- marquee tags ---------- */
+const skills1 = ['AWS ECS','Docker','GitLab CI/CD','GitHub Actions','CloudWatch','Secrets Manager','Terraform','Kubernetes','Linux','Nginx'];
+const skills2 = ['Kotlin','Jetpack Compose','Flutter','Python','FastAPI','Laravel','React','Node.js','PostgreSQL','ELK Stack','Grafana'];
+const fill = (id, arr) => {
+  const el = document.getElementById(id);
+  const mk = () => arr.map(s => `<span class="tag"><i>◆</i>${s}</span>`).join('');
+  el.innerHTML = mk() + mk();
+};
+fill('mq1', skills1); fill('mq2', skills2);
+
+/* ---------- tabs ---------- */
+document.querySelectorAll('.c-exp .tab').forEach(t => t.addEventListener('click', e => {
+  e.stopPropagation();
+  document.querySelectorAll('.c-exp .tab').forEach(x => x.classList.remove('on'));
+  document.querySelectorAll('.c-exp .rows').forEach(x => x.classList.remove('on'));
+  t.classList.add('on');
+  document.querySelector(`.c-exp .rows[data-p="${t.dataset.t}"]`).classList.add('on');
+}));
+
+/* ---------- copy email ---------- */
+const mailCard = document.getElementById('mailCard');
+const cpLbl = document.getElementById('cpLbl');
+const copyMail = async () => {
+  try {
+    await navigator.clipboard.writeText('jubayedsr@gmail.com');
+    cpLbl.textContent = 'copied ✓';
+  } catch {
+    location.href = 'mailto:jubayedsr@gmail.com';
+  }
+  setTimeout(() => cpLbl.textContent = 'copy', 2200);
+};
+mailCard.addEventListener('click', copyMail);
+mailCard.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); copyMail(); } });
+
+/* ---------- staggered card reveal ---------- */
+const cards = [...document.querySelectorAll('.card')];
+if (reduced) cards.forEach(c => c.classList.add('in'));
+else {
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) {
+      const idx = cards.indexOf(e.target);
+      setTimeout(() => e.target.classList.add('in'), (idx % 6) * 70);
+      io.unobserve(e.target);
+    }
+  }), {threshold:.1});
+  cards.forEach(c => io.observe(c));
+}
+
+/* ---------- project expand ---------- */
+document.querySelectorAll('.proj[role=button]').forEach(p => {
+  const toggle = () => {
+    const open = p.classList.toggle('open');
+    p.setAttribute('aria-expanded', open);
+    const cue = p.querySelector('.cue');
+    if (cue) cue.textContent = open ? '− close' : '+ details';
+  };
+  p.addEventListener('click', e => { if (e.target.tagName !== 'A' && !e.target.classList.contains('tab')) toggle(); });
+  p.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+});
+</script>
+</body>
+</html>
