@@ -41,7 +41,6 @@
   if (pool.length === 0) pool = DESIGNS;
 
   var pick = pool[Math.floor(Math.random() * pool.length)];
-  sessionStorage.setItem('lastDesign', pick);
 
   // Support ?design=console.html style manual overrides for sharing a specific look.
   var params = new URLSearchParams(location.search);
@@ -50,7 +49,30 @@
     pick = 'designs/' + forced;
   }
 
-  location.replace(pick);
+  sessionStorage.setItem('lastDesign', pick);
+
+  // Fetch the chosen design and inject it in place, rather than redirecting,
+  // so the address bar stays fixed at the root URL instead of flashing to
+  // /designs/whatever.html.
+  fetch(pick, { cache: 'no-store' })
+    .then(function (res) {
+      if (!res.ok) throw new Error('Failed to load design: ' + res.status);
+      return res.text();
+    })
+    .then(function (html) {
+      // Rewrite the page in place. This re-parses the fetched markup as the
+      // live document (including its <style> and <script> tags) while the
+      // URL in the address bar is left untouched.
+      document.open();
+      document.write(html);
+      document.close();
+    })
+    .catch(function (err) {
+      // Fallback: if fetch fails (e.g. opened via file://), fall back to a
+      // normal navigation so the site still works.
+      console.error(err);
+      location.replace(pick);
+    });
 </script>
 </body>
 </html>
