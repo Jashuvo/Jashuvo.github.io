@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MoneyMan Privacy Policy</title>
+<style>
+  body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; max-width: 720px; margin: 0 auto; padding: 32px 20px 80px; line-height: 1.6; color: #1e1e1e; }
+  h1 { font-size: 1.6em; }
+  h2 { font-size: 1.15em; margin-top: 2em; }
+  code { background: #f0f0f0; padding: 2px 5px; border-radius: 4px; }
+  .effective { color: #666; font-size: 0.9em; }
+</style>
+</head>
+<body>
+<h1>MoneyMan Privacy Policy</h1>
+<p class="effective">Effective date: 23 July 2026</p>
+
+<p>MoneyMan is a personal finance tracker built by a single independent developer.
+This policy describes, in plain language, exactly what data the app touches and why.</p>
+
+<h2>1. Your financial data stays on your device</h2>
+<p>Every account, transaction, category, debt, savings goal, recurring rule, and budget
+you enter is stored only in a local database on your phone. MoneyMan has no server,
+no user accounts, and no login. The developer cannot see, access, or receive your
+financial data at any time, because there is no channel for it to travel through.</p>
+
+<h2>2. Optional: encrypted backup to your own Google Drive</h2>
+<p>If you choose to turn on "Back up to Google Drive" in Settings, MoneyMan will:</p>
+<ul>
+  <li>Ask Google to authorize access to a single, narrow permission called
+  <code>drive.appdata</code> — a hidden storage folder that exists inside
+  <strong>your own</strong> Google Drive account. This folder is not visible in your
+  normal Drive file list and no other app (including ones made by the developer) can
+  read it.</li>
+  <li>Encrypt a copy of your local database with a password you choose, using
+  AES-256-GCM. The password is never transmitted anywhere and is not stored in the
+  backup file itself.</li>
+  <li>Upload that encrypted file to your own Drive's hidden app folder, keeping the 8
+  most recent copies and deleting older ones automatically.</li>
+</ul>
+<p>The developer's app never receives, stores, or has any access to your Drive
+contents beyond writing to that one hidden folder — it is legally and technically
+your data, on your account, from end to end. You can turn this off at any time in
+Settings, which also revokes MoneyMan's Google access and deletes the locally stored
+backup password.</p>
+
+<h2>3. One small, anonymous network request: exchange rates</h2>
+<p>If you use accounts in more than one currency, MoneyMan fetches current exchange
+rates once per day from a public, free exchange-rate API
+(<code>open.er-api.com</code>). This request does not include your name, your
+financial data, or any other information about you or your device — it is the same
+request anyone could make from a browser.</p>
+
+<h2>4. What MoneyMan never does</h2>
+<ul>
+  <li>No advertising, no ad networks, no ad identifiers.</li>
+  <li>No analytics or usage tracking of any kind.</li>
+  <li>No third-party data sharing or selling — there is no third party in the loop.</li>
+  <li>No account creation, no email collection, no login of any kind for using the
+  app itself.</li>
+</ul>
+
+<h2>5. Other permissions</h2>
+<ul>
+  <li><strong>Notifications</strong> — used only for optional, on-device reminders
+  (weekly digest, budget alerts, debt due dates) that you turn on yourself in
+  Settings. No notification content ever leaves your device.</li>
+  <li><strong>Storage access (for manual export/import)</strong> — used only when you
+  explicitly choose to export a backup or CSV file, or import an old backup, via the
+  system file picker. MoneyMan never browses your files outside of what you pick.</li>
+</ul>
+
+<h2>6. Deleting your data</h2>
+<p>Uninstalling MoneyMan permanently deletes all local data on that device. If you
+ever turned on Google Drive backup, you can delete the uploaded backups at any time
+by turning the feature off in Settings (which deletes MoneyMan's local record of your
+Drive password) or by revoking MoneyMan's access from your Google Account's
+"Third-party apps & services" page, which also removes MoneyMan's ability to read or
+write that hidden folder.</p>
+
+<h2>7. Children</h2>
+<p>MoneyMan is not directed at children and does not knowingly collect information
+from anyone, of any age — it does not collect information from you at all in the
+sense of sending it anywhere.</p>
+
+<h2>8. Changes to this policy</h2>
+<p>If this policy ever changes, the effective date above will be updated and the new
+version will be posted at this same address.</p>
+
+<h2>9. Contact</h2>
+<p>Questions about this policy or MoneyMan's data handling can be sent to
+<a href="mailto:jubayedsr@gmail.com">jubayedsr@gmail.com</a>.</p>
+
+</body>
+</html>
